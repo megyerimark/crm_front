@@ -1,59 +1,34 @@
-# CrmFront
+# ÜgyfélFlow CRM – frontend (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.10.
+> Munkanév: **ÜgyfélFlow** (VállalkozóOS). A megjelenített név az `src/environments/*.ts` `appName` mezőjében állítható.
 
-## Development server
+Angular 20 (standalone komponensek, signals), prémium üzleti megjelenés világos és sötét témával, futás közben váltható **magyar / angol / német** felülettel. A backend a `crm_back` Laravel API (`/api/v1`).
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Indítás
 
 ```bash
-ng generate component component-name
+npm install
+npm start            # http://localhost:4200 – a dev build a http://localhost:8000/api/v1 API-t hívja
+npm run build        # éles build: dist/crm_front (az API a /api/v1 relatív útvonalon, ugyanazon a domainen)
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Demo belépés (a backend `php artisan migrate --seed` után): `demo@example.com` / `password`, Super Admin: `admin@example.com` / `password`.
 
-```bash
-ng generate --help
+## Felépítés
+
+| Mappa | Tartalom |
+|---|---|
+| `src/app/core` | API-kliens, hitelesítés (Sanctum token), munkaterület-fejléc (`X-Workspace-Id`), guardok, i18n (`i18n/hu.ts`, `en.ts`, `de.ts`), téma, értesítések |
+| `src/app/layout` | Oldalsáv + felső sáv (munkaterület-váltó, próbaidő-jelzés, nyelv, téma, értesítések), belépési elrendezés |
+| `src/app/shared` | Ikonok, modal, lapozás, formázó pipe-ok (dátum időzónával, pénznem), oszlopdiagram |
+| `src/app/features` | Áttekintés, ügyfelek, érdeklődők, értékesítési kanban, teendők + naptár, űrlapok (szerkesztő, megosztás, beágyazás), publikus űrlap (`/f/:slug`), importközpont, riportok, csapat, beállítások, Super Admin |
+
+A jogosultságot és a csomaglimiteket mindig a backend ellenőrzi; a felület csak elrejti/zárolja a nem elérhető funkciókat (402-es válasznál „Csomagváltás” értesítést mutat).
+
+## Publikus űrlap beágyazása
+
+```html
+<iframe src="https://<frontend>/f/<slug>?embed=1" style="width:100%;min-height:640px;border:0" loading="lazy"></iframe>
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+UTM-paraméterek (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`) a megosztott linkhez fűzve kerülnek a forráskövetésbe (Pro csomagtól).
