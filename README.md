@@ -1,6 +1,6 @@
-# ÜgyfélFlow CRM – frontend (Angular)
+# VállalkozóOS – frontend (Angular)
 
-> Munkanév: **ÜgyfélFlow** (VállalkozóOS). A megjelenített név az `src/environments/*.ts` `appName` mezőjében állítható.
+> Ügyfél- és munkakezelés szolgáltató vállalkozóknak. Arculat: mélyzöld (`--primary`) + borostyán kiemelés (`--accent`), Manrope címsorok, `src/styles.scss` tokenek, logó: `src/app/shared/logo.component.ts`.
 
 Angular 20 (standalone komponensek, signals), prémium üzleti megjelenés világos és sötét témával, futás közben váltható **magyar / angol / német** felülettel. A backend a `crm_back` Laravel API (`/api/v1`).
 
@@ -30,6 +30,12 @@ A jogosultságot és a csomaglimiteket mindig a backend ellenőrzi; a felület c
 - `/welcome` – landing oldal (funkciók, működés, árak havi/éves váltóval, GYIK). Bejelentkezés nélkül a `/` ide irányít.
 - A csomagválasztás a regisztrációig követi a felhasználót (`/register?plan=business&interval=yearly`); a 14 napos Pro próba bankkártya nélkül indul.
 - Beállítások → Előfizetés: jelenlegi csomag és felhasználás, Stripe Checkout, csomag- és ciklusváltás, lemondás/visszavonás, Stripe ügyfélportál, számlázási adatok (adószám), Számlázz.hu e-számlák PDF-ben.
+
+## Fiókbiztonság
+
+- Regisztráció után e-mail-megerősítés (`/verify-email`, `/verify-email/confirm`); megerősítés nélkül az alkalmazás nem érhető el. Meghívó elfogadása megerősíti a címet.
+- Bejelentkezés kétlépcsős azonosítással (TOTP kód vagy visszaállító kód), elfelejtett jelszó (`/forgot-password`, `/reset-password`).
+- Beállítások → Profilom: e-mail-cím módosítás megerősítéssel, jelszó, 2FA be/ki (QR-kód, visszaállító kódok), értesítési beállítások, GDPR adatexport és fióktörlés. Csapat oldalon tulajdonjog átadása.
 
 ## Publikus űrlap beágyazása
 

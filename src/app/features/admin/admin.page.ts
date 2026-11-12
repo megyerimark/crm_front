@@ -104,7 +104,7 @@ interface AdminUser {
               <tbody>
                 @for (u of users()?.data ?? []; track u.id) {
                   <tr>
-                    <td><div class="cell-title">{{ u.name }} @if (u.is_super_admin) { <span class="badge gold">SA</span> }</div><div class="cell-sub">{{ u.email }}</div></td>
+                    <td><div class="cell-title">{{ u.name }} @if (u.is_super_admin) { <span class="badge solid">SA</span> }</div><div class="cell-sub">{{ u.email }}</div></td>
                     <td>{{ u.workspaces_count }}</td><td class="subtle">{{ u.last_login_at ? (u.last_login_at | dt) : '–' }}</td><td class="subtle">{{ u.created_at | dt: 'date' }}</td>
                   </tr>
                 }
@@ -122,7 +122,7 @@ interface AdminUser {
                 @for (log of audit()?.data ?? []; track log.id) {
                   <tr>
                     <td class="subtle nowrap">{{ log.created_at | dt }}</td><td>{{ log.workspace?.name ?? '–' }}</td><td>{{ log.user?.name ?? '–' }}</td>
-                    <td><code>{{ log.action }}</code> @if (log.is_admin_action) { <span class="badge gold">SA</span> }</td><td class="subtle">{{ log.ip_address }}</td>
+                    <td><code>{{ log.action }}</code> @if (log.is_admin_action) { <span class="badge solid">SA</span> }</td><td class="subtle">{{ log.ip_address }}</td>
                   </tr>
                 }
               </tbody>

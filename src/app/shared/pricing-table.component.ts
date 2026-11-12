@@ -20,7 +20,8 @@ const HIGHLIGHT_FEATURES: Record<PlanKey, string[]> = {
     .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
     @media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
     .plan { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 26px 24px; }
-    .plan.popular { border: 2px solid var(--primary); box-shadow: 0 10px 30px rgba(47,74,224,.18); }
+    .plan.popular { border: 2px solid var(--primary); box-shadow: 0 18px 44px rgba(15,107,92,.22); background: linear-gradient(180deg, var(--primary-soft) 0, var(--surface) 140px); }
+    @media (min-width: 901px) { .plan.popular { transform: translateY(-10px); } }
     .plan.current { border-color: var(--success); }
     .ribbon { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); }
     .price { font-size: 34px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
@@ -40,7 +41,7 @@ const HIGHLIGHT_FEATURES: Record<PlanKey, string[]> = {
           @if (plan.key === currentPlan()) {
             <span class="badge success ribbon">{{ 'billing.current' | t }}</span>
           } @else if (plan.key === 'pro') {
-            <span class="badge primary ribbon">★ {{ 'landing.popular' | t }}</span>
+            <span class="badge solid ribbon">★ {{ 'landing.popular' | t }}</span>
           }
           <h2>{{ plan.name }}</h2>
           <p class="tagline small">{{ 'landing.planTagline.' + plan.key | t }}</p>
@@ -66,7 +67,7 @@ const HIGHLIGHT_FEATURES: Record<PlanKey, string[]> = {
           </ul>
           <div class="actions">
             @if (actionLabel(plan.key); as label) {
-              <button class="btn block" [class.primary]="plan.key !== 'free'" [disabled]="busy() === plan.key" (click)="choose.emit(plan.key)">{{ label }}</button>
+              <button class="btn block" [class.accent]="plan.key === 'pro'" [class.primary]="plan.key === 'business'" [disabled]="busy() === plan.key" (click)="choose.emit(plan.key)">{{ label }}</button>
             }
           </div>
         </div>

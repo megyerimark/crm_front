@@ -34,7 +34,9 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
       if (req.url.includes('/public/')) {
         return throwError(() => error);
       }
-      if (error.status === 401 && auth.isLoggedIn()) {
+      if (error.status === 403 && body.code === 'email_unverified') {
+        void router.navigateByUrl('/verify-email');
+      } else if (error.status === 401 && auth.isLoggedIn()) {
         auth.clear();
         void router.navigateByUrl('/login');
       } else if (error.status === 402) {

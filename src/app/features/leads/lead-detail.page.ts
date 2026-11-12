@@ -29,7 +29,7 @@ import { TimelineComponent } from '../shared/timeline.component';
           </div>
           <div class="row wrap">
             @if (l.client_id) {
-              <a class="btn gold" [routerLink]="['/clients', l.client_id]">⭐ {{ 'leads.openClient' | t }}</a>
+              <a class="btn primary" [routerLink]="['/clients', l.client_id]">{{ 'leads.openClient' | t }}</a>
             } @else if (auth.canWrite()) {
               <button class="btn danger" (click)="remove(l)"><app-icon name="trash" [size]="16" /></button>
               <button class="btn" (click)="modal.set('edit')"><app-icon name="edit" [size]="16" /> {{ 'common.edit' | t }}</button>

@@ -6,7 +6,7 @@ import { I18nService, LOCALES } from '../../core/i18n/i18n.service';
 import { fieldErrors } from '../../core/interceptors';
 import { Workspace } from '../../core/models';
 import { ToastService } from '../../core/toast.service';
-import { UI } from '../../shared/ui';
+import { timezoneList, UI } from '../../shared/ui';
 
 @Component({
   selector: 'app-workspace-section',
@@ -51,7 +51,7 @@ export class WorkspaceSection {
 
   protected readonly locales = LOCALES;
   protected readonly countries = [['HU', 'Magyarország'], ['AT', 'Österreich'], ['DE', 'Deutschland'], ['CH', 'Schweiz'], ['SK', 'Slovensko'], ['RO', 'România'], ['RS', 'Srbija'], ['HR', 'Hrvatska'], ['SI', 'Slovenija'], ['GB', 'United Kingdom']];
-  protected readonly timezones = (Intl as unknown as { supportedValuesOf?: (key: string) => string[] }).supportedValuesOf?.('timeZone') ?? ['Europe/Budapest', 'Europe/Vienna', 'Europe/Berlin', 'UTC'];
+  protected readonly timezones = timezoneList(this.auth.workspace()?.timezone);
   protected form: Partial<Workspace> = { ...this.auth.workspace() };
   protected readonly errors = signal<Record<string, string>>({});
 

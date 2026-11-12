@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { adminGuard, authGuard, guestGuard, superAdminGuard } from './core/guards';
+import { adminGuard, authGuard, guestGuard, sessionGuard, superAdminGuard } from './core/guards';
 import { ShellComponent } from './layout/shell.component';
 
 export const routes: Routes = [
@@ -7,6 +7,11 @@ export const routes: Routes = [
   { path: 'pricing', redirectTo: 'welcome' },
   { path: 'login', canActivate: [guestGuard], loadComponent: () => import('./features/auth/login.page').then((m) => m.LoginPage) },
   { path: 'register', canActivate: [guestGuard], loadComponent: () => import('./features/auth/register.page').then((m) => m.RegisterPage) },
+  { path: 'forgot-password', canActivate: [guestGuard], loadComponent: () => import('./features/auth/forgot-password.page').then((m) => m.ForgotPasswordPage) },
+  { path: 'reset-password', loadComponent: () => import('./features/auth/reset-password.page').then((m) => m.ResetPasswordPage) },
+  { path: 'verify-email', canActivate: [sessionGuard], loadComponent: () => import('./features/auth/verify-email.page').then((m) => m.VerifyEmailPage) },
+  { path: 'verify-email/confirm', loadComponent: () => import('./features/auth/signed-link.page').then((m) => m.SignedLinkPage), data: { kind: 'verify' } },
+  { path: 'confirm-email-change', loadComponent: () => import('./features/auth/signed-link.page').then((m) => m.SignedLinkPage), data: { kind: 'email-change' } },
   { path: 'invite/:token', loadComponent: () => import('./features/auth/invite.page').then((m) => m.InvitePage) },
   { path: 'f/:slug', loadComponent: () => import('./features/public-form/public-form.page').then((m) => m.PublicFormPage) },
   { path: 'onboarding', canActivate: [authGuard], loadComponent: () => import('./features/auth/onboarding.page').then((m) => m.OnboardingPage) },

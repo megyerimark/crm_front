@@ -33,7 +33,7 @@ const BASE_FIELDS = ['name', 'email', 'phone', 'company', 'message'];
               @if (f.status === 'published') {
                 <button class="btn" (click)="save('draft')">{{ 'forms.unpublish' | t }}</button>
               } @else {
-                <button class="btn gold" (click)="save('published')">{{ 'forms.publish' | t }}</button>
+                <button class="btn accent" (click)="save('published')">{{ 'forms.publish' | t }}</button>
               }
               <button class="btn primary" (click)="save()" [disabled]="busy()">{{ 'common.save' | t }}</button>
             </div>

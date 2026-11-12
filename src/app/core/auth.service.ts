@@ -7,11 +7,18 @@ import { Locale, Role, Subscription, Theme, User, Workspace } from './models';
 import { storage } from './storage';
 import { ThemeService } from './theme.service';
 
-interface AuthResponse {
+export interface AuthResponse {
   token: string;
   user: User;
   workspaces: Workspace[];
 }
+
+export interface TwoFactorRequired {
+  two_factor_required: true;
+  challenge: string;
+}
+
+export type LoginResult = AuthResponse | TwoFactorRequired;
 
 const TOKEN_KEY = 'uf.token';
 const WORKSPACE_KEY = 'uf.workspace';
@@ -31,6 +38,7 @@ export class AuthService {
   readonly subscription = signal<Subscription | null>(null);
 
   readonly isLoggedIn = computed(() => !!this.token());
+  readonly isVerified = computed(() => !!this.user()?.email_verified_at);
   readonly workspace = computed(() => this.workspaces().find((w) => w.id === this.workspaceId()) ?? null);
   readonly role = computed<Role | null>(() => this.workspace()?.role ?? null);
   readonly canWrite = computed(() => this.hasRole('member'));
@@ -72,8 +80,21 @@ export class AuthService {
     );
   }
 
-  login(email: string, password: string): Observable<AuthResponse> {
-    return this.api.post<AuthResponse>('auth/login', { email, password }).pipe(tap((res) => this.storeSession(res)));
+  /** Returns a 2FA challenge instead of a session when two-factor authentication is enabled. */
+  login(email: string, password: string): Observable<LoginResult> {
+    return this.api.post<LoginResult>('auth/login', { email, password }).pipe(
+      tap((res) => {
+        if ('token' in res) {
+          this.storeSession(res);
+        }
+      }),
+    );
+  }
+
+  completeTwoFactor(challenge: string, code: string | null, recoveryCode: string | null): Observable<AuthResponse> {
+    return this.api
+      .post<AuthResponse>('auth/two-factor/challenge', { challenge, code: code || null, recovery_code: recoveryCode || null })
+      .pipe(tap((res) => this.storeSession(res)));
   }
 
   register(payload: Record<string, unknown>): Observable<AuthResponse> {
@@ -151,7 +172,9 @@ export class AuthService {
       (id) => id && workspaces.some((w) => w.id === id),
     );
     this.setWorkspace(preferred ?? null);
-    this.refreshSubscription();
+    if (user.email_verified_at) {
+      this.refreshSubscription();
+    }
   }
 
   clear(): void {

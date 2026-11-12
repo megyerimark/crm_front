@@ -175,7 +175,7 @@ interface ImportRowLog {
                   <td><span class="badge">{{ 'imports.statuses.' + job.status | t }}</span></td>
                   <td class="right">{{ job.imported_count + job.updated_count }}</td><td class="right">{{ job.skipped_count }}</td><td class="right">{{ job.failed_count }}</td>
                 </tr>
-              } @empty { <tr><td colspan="7"><div class="empty small">{{ 'common.empty' | t }}</div></td></tr> }
+              } @empty { <tr><td colspan="7"><app-empty-state illustration="imports" [compact]="true" [title]="'empty.importsTitle' | t" [text]="'empty.importsText' | t" /></td></tr> }
             </tbody>
           </table>
         </div>

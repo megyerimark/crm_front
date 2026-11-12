@@ -42,10 +42,26 @@ interface DashboardData {
 
       @if (data(); as d) {
         <div class="grid grid-4">
-          <a class="card stat" routerLink="/clients"><span class="stat-label">{{ 'dashboard.clientsTotal' | t }}</span><span class="stat-value">{{ d.stats.clients_total | num }}</span><span class="subtle">{{ 'dashboard.clientsActive' | t }}: {{ d.stats.clients_active | num }}</span></a>
-          <a class="card stat" routerLink="/leads" [queryParams]="{ status: 'new' }"><span class="stat-label">{{ 'dashboard.leadsNew' | t }}</span><span class="stat-value">{{ d.stats.leads_new | num }}</span><span class="subtle">{{ 'dashboard.leads30' | t }}: {{ d.stats.leads_last_30_days | num }}</span></a>
-          <a class="card stat" routerLink="/tasks"><span class="stat-label">{{ 'dashboard.tasksOpen' | t }}</span><span class="stat-value">{{ d.stats.tasks_open | num }}</span><span class="subtle" [style.color]="d.stats.tasks_overdue ? 'var(--danger)' : null">{{ 'dashboard.tasksOverdue' | t }}: {{ d.stats.tasks_overdue | num }}</span></a>
-          <a class="card stat" routerLink="/pipeline"><span class="stat-label">{{ 'dashboard.pipelineValue' | t }}</span><span class="stat-value">{{ d.stats.deals_open_value | money }}</span><span class="subtle">{{ d.pipeline?.name }}</span></a>
+          <a class="card kpi" routerLink="/leads" [queryParams]="{ status: 'new' }">
+            <span class="stat-label">{{ 'dashboard.leadsNew' | t }}</span><span class="kpi-icon"><app-icon name="inbox" /></span>
+            <span class="stat-value">{{ d.stats.leads_new | num }}</span>
+            <span class="subtle">{{ 'dashboard.leads30' | t }}: {{ d.stats.leads_last_30_days | num }}</span>
+          </a>
+          <a class="card kpi" routerLink="/tasks">
+            <span class="stat-label">{{ 'dashboard.tasksOpen' | t }}</span><span class="kpi-icon" [class.warn]="d.stats.tasks_overdue > 0"><app-icon name="checkSquare" /></span>
+            <span class="stat-value">{{ d.stats.tasks_open | num }}</span>
+            <span class="subtle" [style.color]="d.stats.tasks_overdue ? 'var(--danger)' : null">{{ 'dashboard.tasksOverdue' | t }}: {{ d.stats.tasks_overdue | num }}</span>
+          </a>
+          <a class="card kpi" routerLink="/pipeline">
+            <span class="stat-label">{{ 'dashboard.pipelineValue' | t }}</span><span class="kpi-icon"><app-icon name="kanban" /></span>
+            <span class="stat-value">{{ d.stats.deals_open_value | money }}</span>
+            <span class="subtle">{{ d.pipeline?.name }}</span>
+          </a>
+          <a class="card kpi" routerLink="/clients">
+            <span class="stat-label">{{ 'dashboard.clientsTotal' | t }}</span><span class="kpi-icon"><app-icon name="users" /></span>
+            <span class="stat-value">{{ d.stats.clients_total | num }}</span>
+            <span class="subtle">{{ 'dashboard.clientsActive' | t }}: {{ d.stats.clients_active | num }}</span>
+          </a>
         </div>
 
         @if (d.stats.clients_total === 0 && d.stats.leads_last_30_days === 0) {
@@ -91,7 +107,7 @@ interface DashboardData {
                   </div>
                   <span class="badge" [class.danger]="task.is_overdue">{{ task.due_at | dt }}</span>
                 </div>
-              } @empty { <div class="empty">{{ 'dashboard.noUpcoming' | t }}</div> }
+              } @empty { <app-empty-state illustration="tasks" [compact]="true" [title]="'empty.upcomingTitle' | t" [text]="'empty.upcomingText' | t" /> }
             </div>
           </div>
           <div class="card">
@@ -100,7 +116,7 @@ interface DashboardData {
               @for (s of d.pipeline?.stages ?? []; track s.id) {
                 <div class="hbar" style="grid-template-columns: 140px 1fr 110px">
                   <span class="truncate">{{ s.name }}</span>
-                  <div class="progress" [class.warn]="s.type === 'lost'"><div [style.width.%]="(s.deals / maxStage()) * 100"></div></div>
+                  <div class="progress" [class.muted]="s.type === 'lost'"><div [style.width.%]="(s.deals / maxStage()) * 100"></div></div>
                   <span class="right small">{{ s.deals }} · {{ s.value | money }}</span>
                 </div>
               }
@@ -122,7 +138,7 @@ interface DashboardData {
                 </div>
                 <span class="subtle nowrap">{{ a.occurred_at | dt: 'relative' }}</span>
               </div>
-            } @empty { <div class="empty small">{{ 'activity.empty' | t }}</div> }
+            } @empty { <app-empty-state illustration="activity" [compact]="true" [title]="'empty.activityTitle' | t" [text]="'empty.activityText' | t" /> }
           </div>
         </div>
       } @else {

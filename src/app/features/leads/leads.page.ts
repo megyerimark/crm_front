@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Subject, debounceTime } from 'rxjs';
 import { ApiService } from '../../core/api.service';
 import { AuthService } from '../../core/auth.service';
@@ -11,7 +11,7 @@ import { LeadFormModal } from '../shared/lead-form.modal';
 
 @Component({
   selector: 'app-leads-page',
-  imports: [FormsModule, LeadFormModal, ...UI],
+  imports: [FormsModule, RouterLink, LeadFormModal, ...UI],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="page">
@@ -64,7 +64,15 @@ import { LeadFormModal } from '../shared/lead-form.modal';
                   <td class="subtle nowrap" [title]="l.created_at | dt">{{ l.created_at | dt: 'relative' }}</td>
                 </tr>
               } @empty {
-                <tr><td colspan="6"><div class="empty"><h3>{{ 'common.empty' | t }}</h3></div></td></tr>
+                <tr><td colspan="6">
+                  @if (hasFilters()) {
+                    <app-empty-state illustration="search" [title]="'empty.noResultsTitle' | t" [text]="'empty.noResultsText' | t" />
+                  } @else {
+                    <app-empty-state illustration="leads" [title]="'empty.leadsTitle' | t" [text]="'empty.leadsText' | t">
+                      <a class="btn primary" routerLink="/forms">{{ 'empty.leadsCta' | t }}</a>
+                    </app-empty-state>
+                  }
+                </td></tr>
               }
             </tbody>
           </table>
@@ -128,6 +136,10 @@ export class LeadsPage {
     this.api
       .get<Paginated<Lead>>('leads', { search: this.search, status: this.statusFilter, source: this.source, form_id: this.formId, owner_id: this.ownerId, page: this.current, per_page: this.perPage })
       .subscribe((res) => this.page.set(res));
+  }
+
+  hasFilters(): boolean {
+    return !!(this.search || this.statusFilter || this.source || this.formId || this.ownerId);
   }
 
   open(id: number): void {

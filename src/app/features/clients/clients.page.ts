@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { LowerCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Subject, debounceTime } from 'rxjs';
 import { ApiService, QueryParams } from '../../core/api.service';
 import { AuthService } from '../../core/auth.service';
@@ -13,7 +13,7 @@ import { ClientFormModal } from '../shared/client-form.modal';
 
 @Component({
   selector: 'app-clients-page',
-  imports: [FormsModule, LowerCasePipe, ClientFormModal, ...UI],
+  imports: [FormsModule, LowerCasePipe, RouterLink, ClientFormModal, ...UI],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="page">
@@ -100,7 +100,13 @@ import { ClientFormModal } from '../shared/client-form.modal';
                     <td class="subtle nowrap">{{ c.created_at | dt: 'date' }}</td>
                   </tr>
                 } @empty {
-                  <tr><td colspan="7"><div class="empty"><h3>{{ 'common.empty' | t }}</h3></div></td></tr>
+                  <tr><td colspan="7">@if (hasFilters()) {
+                    <app-empty-state illustration="search" [title]="'empty.noResultsTitle' | t" [text]="'empty.noResultsText' | t" />
+                  } @else {
+                    <app-empty-state illustration="clients" [title]="'empty.clientsTitle' | t" [text]="'empty.clientsText' | t">
+                      <a class="btn primary" routerLink="/imports">{{ 'empty.clientsCta' | t }}</a>
+                    </app-empty-state>
+                  }</td></tr>
                 }
               </tbody>
             </table>
@@ -120,7 +126,13 @@ import { ClientFormModal } from '../shared/client-form.modal';
                 </div>
                 <div class="row wrap mt-sm">@for (tag of c.tags; track tag) { <span class="tag">{{ tag }}</span> }</div>
               </div>
-            } @empty { <div class="empty span-2">{{ 'common.empty' | t }}</div> }
+            } @empty { <div style="grid-column:1/-1">@if (hasFilters()) {
+                    <app-empty-state illustration="search" [title]="'empty.noResultsTitle' | t" [text]="'empty.noResultsText' | t" />
+                  } @else {
+                    <app-empty-state illustration="clients" [title]="'empty.clientsTitle' | t" [text]="'empty.clientsText' | t">
+                      <a class="btn primary" routerLink="/imports">{{ 'empty.clientsCta' | t }}</a>
+                    </app-empty-state>
+                  }</div> }
           </div>
         }
         <app-pagination [meta]="page()?.meta ?? null" (page)="goTo($event)" (perPage)="perPage = $event; reload()" />
@@ -201,6 +213,10 @@ export class ClientsPage {
   setView(view: 'table' | 'cards'): void {
     this.view.set(view);
     storage.set('uf.clients.view', view);
+  }
+
+  hasFilters(): boolean {
+    return !!(this.search || this.status || this.type || this.ownerId || this.category || this.tag || this.source || this.createdFrom || this.createdTo);
   }
 
   open(client: Client): void {

@@ -97,7 +97,7 @@ export class RegisterPage {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const intent = this.chosenPlan() ? { plan: this.chosenPlan(), interval: this.interval() === 'yearly' ? 'yearly' : 'monthly' } : {};
     this.auth.register({ ...this.form, ...intent, locale: this.i18n.locale(), timezone }).subscribe({
-      next: () => void this.router.navigateByUrl(this.redirect() || '/'),
+      next: () => void this.router.navigateByUrl(this.isInvite() ? this.redirect()! : '/verify-email'),
       error: (err) => {
         this.errors.set(fieldErrors(err));
         this.busy.set(false);

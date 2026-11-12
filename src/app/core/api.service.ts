@@ -26,8 +26,8 @@ export class ApiService {
     return this.http.put<T>(this.url(path), body);
   }
 
-  delete<T>(path: string): Observable<T> {
-    return this.http.delete<T>(this.url(path));
+  delete<T>(path: string, body?: unknown): Observable<T> {
+    return this.http.delete<T>(this.url(path), body === undefined ? {} : { body });
   }
 
   download(path: string, params: QueryParams = {}): Observable<Blob> {
