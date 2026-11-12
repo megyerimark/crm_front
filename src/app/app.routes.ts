@@ -3,6 +3,8 @@ import { adminGuard, authGuard, guestGuard, superAdminGuard } from './core/guard
 import { ShellComponent } from './layout/shell.component';
 
 export const routes: Routes = [
+  { path: 'welcome', loadComponent: () => import('./features/landing/landing.page').then((m) => m.LandingPage) },
+  { path: 'pricing', redirectTo: 'welcome' },
   { path: 'login', canActivate: [guestGuard], loadComponent: () => import('./features/auth/login.page').then((m) => m.LoginPage) },
   { path: 'register', canActivate: [guestGuard], loadComponent: () => import('./features/auth/register.page').then((m) => m.RegisterPage) },
   { path: 'invite/:token', loadComponent: () => import('./features/auth/invite.page').then((m) => m.InvitePage) },

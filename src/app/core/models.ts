@@ -33,6 +33,8 @@ export interface Workspace {
   on_trial: boolean;
   trial_ends_at: string | null;
   subscription_status: string | null;
+  billing_interval: BillingInterval | null;
+  intended_plan: PlanKey | null;
   created_at: string;
 }
 
@@ -47,6 +49,9 @@ export interface Subscription {
   on_trial: boolean;
   trial_ends_at: string | null;
   subscription_status: string | null;
+  subscription_ends_at: string | null;
+  billing_interval: BillingInterval | null;
+  intended_plan: PlanKey | null;
   limits: Record<string, number | null>;
   features: Record<string, boolean>;
   usage: Record<string, UsageItem>;
@@ -56,9 +61,70 @@ export interface PlanDefinition {
   key: PlanKey;
   name: string;
   price: number;
+  prices: Record<BillingInterval, number>;
   currency: string;
   limits: Record<string, number | null>;
   features: Record<string, boolean>;
+}
+
+export type BillingInterval = 'monthly' | 'yearly';
+
+export interface PlanCatalogue {
+  data: PlanDefinition[];
+  trial_days: number;
+  checkout_enabled: boolean;
+  prices_include_vat: boolean;
+  vat_key: string;
+}
+
+export interface BillingStatus {
+  configured: boolean;
+  has_subscription: boolean;
+  plan: PlanKey;
+  interval: BillingInterval | null;
+  intended_plan: PlanKey | null;
+  stripe_status: string | null;
+  on_grace_period: boolean;
+  ends_at: string | null;
+  subscription_trial_ends_at: string | null;
+  past_due: boolean;
+  payment_method: { type: string; last_four: string } | null;
+  billing_details_complete: boolean;
+}
+
+export interface BillingDetails {
+  billing_name: string | null;
+  billing_email: string | null;
+  billing_country: string | null;
+  billing_postcode: string | null;
+  billing_city: string | null;
+  billing_address: string | null;
+  billing_tax_number: string | null;
+  billing_eu_vat_number: string | null;
+}
+
+export interface BillingInvoice {
+  id: number;
+  number: string | null;
+  status: 'pending' | 'issued' | 'failed';
+  plan: PlanKey | null;
+  interval: BillingInterval | null;
+  currency: string;
+  net_amount: number;
+  vat_amount: number;
+  gross_amount: number;
+  period_start: string | null;
+  period_end: string | null;
+  paid_at: string | null;
+  has_pdf: boolean;
+}
+
+export interface BillingOverview {
+  status: BillingStatus;
+  details: BillingDetails;
+  invoices: BillingInvoice[];
+  vat_key: string;
+  prices_include_vat: boolean;
 }
 
 export interface Paginated<T> {

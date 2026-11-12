@@ -52,6 +52,11 @@ export class I18nService {
     return params ? value.replace(/\{(\w+)\}/g, (_, name: string) => String(params[name] ?? '')) : value;
   }
 
+  /** Non-string dictionary values (lists such as FAQ entries). */
+  raw<T>(key: string): T {
+    return (this.lookup(DICTIONARIES[this.locale()], key) ?? this.lookup(DICTIONARIES.hu, key)) as T;
+  }
+
   has(key: string): boolean {
     return typeof this.lookup(DICTIONARIES[this.locale()], key) === 'string';
   }

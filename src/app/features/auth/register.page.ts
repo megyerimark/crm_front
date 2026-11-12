@@ -16,6 +16,15 @@ import { UI } from '../../shared/ui';
       <h1>{{ 'auth.createAccount' | t }}</h1>
       <p class="muted mt-sm">{{ 'auth.createSub' | t }}</p>
       <div class="banner gold mt mb"><app-icon name="star" [size]="16" /> {{ 'auth.trial' | t }}</div>
+      @if (chosenPlan(); as p) {
+        <div class="card flat row between mb" style="padding:12px 16px">
+          <div>
+            <div class="subtle">{{ 'plan.current' | t }}</div>
+            <strong>{{ 'plan.' + p | t }}</strong> · {{ (interval() === 'yearly' ? 'landing.yearly' : 'landing.monthly') | t }}
+          </div>
+          <a class="small" routerLink="/welcome" fragment="pricing">{{ 'common.edit' | t }}</a>
+        </div>
+      }
       <form class="stack" (ngSubmit)="submit()">
         <div class="field">
           <label for="name">{{ 'auth.name' | t }}</label>
@@ -62,6 +71,8 @@ export class RegisterPage {
   private readonly i18n = inject(I18nService);
   readonly redirect = input<string>();
   readonly email = input<string>();
+  readonly plan = input<string>();
+  readonly interval = input<string>();
 
   protected form = { name: '', email: '', workspace_name: '', password: '', password_confirmation: '', accept_terms: false };
   protected readonly busy = signal(false);
@@ -69,6 +80,11 @@ export class RegisterPage {
 
   ngOnInit(): void {
     this.form.email = this.email() ?? '';
+  }
+
+  chosenPlan(): string | null {
+    const plan = this.plan();
+    return plan === 'pro' || plan === 'business' || plan === 'free' ? plan : null;
   }
 
   isInvite(): boolean {
@@ -79,7 +95,8 @@ export class RegisterPage {
     this.busy.set(true);
     this.errors.set({});
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    this.auth.register({ ...this.form, locale: this.i18n.locale(), timezone }).subscribe({
+    const intent = this.chosenPlan() ? { plan: this.chosenPlan(), interval: this.interval() === 'yearly' ? 'yearly' : 'monthly' } : {};
+    this.auth.register({ ...this.form, ...intent, locale: this.i18n.locale(), timezone }).subscribe({
       next: () => void this.router.navigateByUrl(this.redirect() || '/'),
       error: (err) => {
         this.errors.set(fieldErrors(err));

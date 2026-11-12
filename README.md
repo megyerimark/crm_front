@@ -25,6 +25,12 @@ Demo belépés (a backend `php artisan migrate --seed` után): `demo@example.com
 
 A jogosultságot és a csomaglimiteket mindig a backend ellenőrzi; a felület csak elrejti/zárolja a nem elérhető funkciókat (402-es válasznál „Csomagváltás” értesítést mutat).
 
+## Nyilvános oldal és előfizetés
+
+- `/welcome` – landing oldal (funkciók, működés, árak havi/éves váltóval, GYIK). Bejelentkezés nélkül a `/` ide irányít.
+- A csomagválasztás a regisztrációig követi a felhasználót (`/register?plan=business&interval=yearly`); a 14 napos Pro próba bankkártya nélkül indul.
+- Beállítások → Előfizetés: jelenlegi csomag és felhasználás, Stripe Checkout, csomag- és ciklusváltás, lemondás/visszavonás, Stripe ügyfélportál, számlázási adatok (adószám), Számlázz.hu e-számlák PDF-ben.
+
 ## Publikus űrlap beágyazása
 
 ```html
