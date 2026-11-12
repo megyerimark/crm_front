@@ -20,7 +20,7 @@ const HIGHLIGHT_FEATURES: Record<PlanKey, string[]> = {
     .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
     @media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
     .plan { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 26px 24px; }
-    .plan.popular { border: 2px solid var(--primary); box-shadow: 0 10px 30px rgba(47,74,224,.18); }
+    .plan.popular { border: 2px solid var(--primary); box-shadow: 0 10px 30px rgba(15,107,92,.18); }
     .plan.current { border-color: var(--success); }
     .ribbon { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); }
     .price { font-size: 34px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }

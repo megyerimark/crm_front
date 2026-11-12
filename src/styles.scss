@@ -1,71 +1,75 @@
-/* ÜgyfélFlow – Premium Business design system (light + dark) */
+/* VállalkozóOS design system (light + dark) */
 
 :root {
   --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --bg: #f4f6fb;
+  --font-display: 'Manrope', 'Inter', system-ui, sans-serif;
+  --radius: 14px;
+  --radius-sm: 9px;
+  /* VállalkozóOS brand: deep "workshop" green + amber accent */
+  --bg: #f5f6f2;
   --surface: #ffffff;
-  --surface-2: #f8f9fc;
-  --surface-3: #eef1f7;
-  --border: #e3e7ef;
-  --border-strong: #cfd5e2;
-  --text: #121a2e;
-  --text-2: #4a5470;
-  --text-3: #7d869e;
-  --primary: #2f4ae0;
-  --primary-hover: #2540c9;
-  --primary-soft: #e9edff;
+  --surface-2: #f9faf7;
+  --surface-3: #eef1ec;
+  --border: #e2e6df;
+  --border-strong: #cdd3ca;
+  --text: #13201d;
+  --text-2: #475450;
+  --text-3: #7c8783;
+  --primary: #0f6b5c;
+  --primary-hover: #0b5649;
+  --primary-soft: #e2f1ec;
   --primary-text: #ffffff;
-  --gold: #c89a2a;
-  --gold-soft: #fbf3dd;
-  --success: #12875a;
-  --success-soft: #e3f6ee;
-  --warning: #b86e00;
-  --warning-soft: #fff2dc;
-  --danger: #d1344a;
-  --danger-soft: #fde8eb;
-  --info: #1f78c8;
-  --info-soft: #e3f0fc;
-  --sidebar: #0e1530;
-  --sidebar-text: #aeb6d1;
-  --sidebar-active: #1c2650;
-  --shadow: 0 1px 2px rgba(16, 24, 48, 0.04), 0 4px 16px rgba(16, 24, 48, 0.06);
-  --shadow-lg: 0 12px 40px rgba(16, 24, 48, 0.18);
-  --focus: 0 0 0 3px rgba(47, 74, 224, 0.25);
+  --gold: #c98a06;
+  --gold-soft: #fdf3dc;
+  --accent: #f2a516;
+  --success: #16865a;
+  --success-soft: #e2f5ec;
+  --warning: #b56a00;
+  --warning-soft: #fff1da;
+  --danger: #cc3a3f;
+  --danger-soft: #fce8e8;
+  --info: #1f6fb5;
+  --info-soft: #e4effa;
+  --sidebar: #0c1f1c;
+  --sidebar-text: #a7b8b2;
+  --sidebar-active: #173631;
+  --shadow: 0 1px 2px rgba(19, 32, 29, 0.05), 0 4px 16px rgba(19, 32, 29, 0.06);
+  --shadow-lg: 0 14px 44px rgba(19, 32, 29, 0.16);
+  --focus: 0 0 0 3px rgba(15, 107, 92, 0.25);
   color-scheme: light;
 }
 
 :root[data-theme='dark'] {
-  --bg: #0b1020;
-  --surface: #121a30;
-  --surface-2: #161f39;
-  --surface-3: #1c2644;
-  --border: #253055;
-  --border-strong: #33406b;
-  --text: #e8ecf8;
-  --text-2: #aab3cf;
-  --text-3: #7a84a6;
-  --primary: #6f86ff;
-  --primary-hover: #8597ff;
-  --primary-soft: #1f2a55;
-  --primary-text: #0b1020;
-  --gold: #e6b84a;
-  --gold-soft: #3a2f12;
+  --bg: #0a1412;
+  --surface: #101e1b;
+  --surface-2: #142420;
+  --surface-3: #1a2d29;
+  --border: #233a35;
+  --border-strong: #2f4b45;
+  --text: #e7efec;
+  --text-2: #a8b9b3;
+  --text-3: #758882;
+  --primary: #37c2a1;
+  --primary-hover: #52d1b2;
+  --primary-soft: #143a33;
+  --primary-text: #062019;
+  --gold: #f2b53a;
+  --gold-soft: #3a2b0c;
+  --accent: #f2a516;
   --success: #3ccf91;
-  --success-soft: #11372a;
+  --success-soft: #10352a;
   --warning: #f2a93b;
   --warning-soft: #3d2a0c;
-  --danger: #ff6b7f;
-  --danger-soft: #451a24;
+  --danger: #ff6b72;
+  --danger-soft: #451c20;
   --info: #5cb1ff;
   --info-soft: #12304d;
-  --sidebar: #080c19;
-  --sidebar-text: #9aa3c4;
-  --sidebar-active: #18214a;
+  --sidebar: #061210;
+  --sidebar-text: #93a8a1;
+  --sidebar-active: #143a33;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
-  --focus: 0 0 0 3px rgba(111, 134, 255, 0.35);
+  --shadow-lg: 0 14px 44px rgba(0, 0, 0, 0.5);
+  --focus: 0 0 0 3px rgba(55, 194, 161, 0.35);
   color-scheme: dark;
 }
 
@@ -81,7 +85,7 @@ body {
 }
 a { color: var(--primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
-h1, h2, h3, h4 { margin: 0; line-height: 1.25; letter-spacing: -0.01em; }
+h1, h2, h3, h4 { margin: 0; line-height: 1.25; letter-spacing: -0.015em; font-family: var(--font-display); }
 h1 { font-size: 24px; font-weight: 700; }
 h2 { font-size: 18px; font-weight: 600; }
 h3 { font-size: 15px; font-weight: 600; }
@@ -131,7 +135,7 @@ pre { background: var(--surface-3); padding: 12px; border-radius: var(--radius-s
 /* Stats */
 .stat { padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
 .stat-label { color: var(--text-2); font-size: 12.5px; font-weight: 500; }
-.stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.stat-value { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; font-family: var(--font-display); }
 .stat-value.danger { color: var(--danger); }
 
 /* Buttons */
@@ -153,7 +157,8 @@ pre { background: var(--surface-3); padding: 12px; border-radius: var(--radius-s
 .btn.icon { width: 36px; padding: 0; }
 .btn.sm.icon { width: 30px; }
 .btn.block { width: 100%; }
-.btn.gold { background: var(--gold); border-color: var(--gold); color: #1d1606; }
+.btn.gold, .btn.accent { background: var(--accent); border-color: var(--accent); color: #1d1606; }
+.btn.gold:hover, .btn.accent:hover { background: #e39a0c; }
 
 /* Forms */
 .field { display: flex; flex-direction: column; gap: 6px; }

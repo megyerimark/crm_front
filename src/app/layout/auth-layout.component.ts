@@ -2,21 +2,21 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { I18nService, LOCALES } from '../core/i18n/i18n.service';
 import { ThemeService } from '../core/theme.service';
+import { LogoComponent } from '../shared/logo.component';
 import { UI } from '../shared/ui';
 
 @Component({
   selector: 'app-auth-layout',
-  imports: [...UI],
+  imports: [LogoComponent, ...UI],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     :host { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); min-height: 100vh; }
-    .brand-panel { background: radial-gradient(circle at 20% 10%, #2b3f9e 0, #101a45 45%, #070b1c 100%); color: #dfe5ff; padding: 48px; display: flex; flex-direction: column; justify-content: space-between; }
+    .brand-panel { background: radial-gradient(900px 600px at 15% 0%, #1b6e60 0, #0c2a25 50%, #06120f 100%); color: #d5e7e1; padding: 48px; display: flex; flex-direction: column; justify-content: space-between; }
     .brand-panel h1 { font-size: 36px; color: #fff; max-width: 460px; line-height: 1.15; }
     .brand-panel ul { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-direction: column; gap: 14px; }
     .brand-panel li { display: flex; gap: 10px; align-items: center; }
-    .brand-panel li app-icon { color: #f5c24c; }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: #fff; }
-    .logo-mark { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #3c5cff, #2236b8); display: flex; align-items: center; justify-content: center; }
+    .brand-panel li app-icon { color: var(--accent); }
+    .brand-panel h1 em { font-style: normal; color: var(--accent); }
     .form-panel { display: flex; flex-direction: column; padding: 24px; background: var(--surface); }
     .form-inner { width: 100%; max-width: 420px; margin: auto; padding: 24px 0; }
     .tools { display: flex; justify-content: flex-end; gap: 6px; }
@@ -24,7 +24,7 @@ import { UI } from '../shared/ui';
   `],
   template: `
     <section class="brand-panel">
-      <div class="logo"><div class="logo-mark"><app-icon name="zap" /></div> {{ appName }}</div>
+      <app-logo [size]="36" [inverse]="true" />
       <div>
         <h1>{{ 'app.tagline' | t }}</h1>
         <ul>
@@ -33,7 +33,7 @@ import { UI } from '../shared/ui';
           <li><app-icon name="check" /> {{ 'auth.benefits3' | t }}</li>
         </ul>
       </div>
-      <small style="opacity:.6">{{ 'app.poweredBy' | t }}</small>
+      <small style="opacity:.65">{{ 'app.poweredBy' | t }}</small>
     </section>
     <section class="form-panel">
       <div class="tools">

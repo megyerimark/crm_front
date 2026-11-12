@@ -7,6 +7,7 @@ import { AuthService } from '../core/auth.service';
 import { I18nService, LOCALES } from '../core/i18n/i18n.service';
 import { AppNotification, Locale } from '../core/models';
 import { ThemeService } from '../core/theme.service';
+import { LogoComponent } from '../shared/logo.component';
 import { UI } from '../shared/ui';
 
 interface NavItem {
@@ -19,23 +20,21 @@ interface NavItem {
 
 @Component({
   selector: 'app-shell',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, ...UI],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, LogoComponent, ...UI],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     :host { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; }
     .sidebar { background: var(--sidebar); color: var(--sidebar-text); display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; padding: 18px 12px; gap: 18px; z-index: 30; }
-    .brand { display: flex; align-items: center; gap: 10px; padding: 0 8px; color: #fff; font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
-    .brand-mark { width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(135deg, #3c5cff, #2236b8); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(60,92,255,.35); }
-    .brand small { display: block; font-size: 10.5px; font-weight: 500; color: var(--sidebar-text); letter-spacing: .06em; text-transform: uppercase; }
+    .brand { display: flex; align-items: center; padding: 2px 8px; text-decoration: none !important; }
     nav { display: flex; flex-direction: column; gap: 2px; overflow-y: auto; }
     nav a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: var(--sidebar-text); font-weight: 500; text-decoration: none; }
     nav a:hover { background: rgba(255,255,255,.05); color: #fff; }
     nav a.active { background: var(--sidebar-active); color: #fff; }
-    nav a.active app-icon { color: #8fa2ff; }
+    nav a.active app-icon { color: var(--accent); }
     .nav-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: #5e6890; padding: 12px 12px 4px; }
     .ws { position: relative; }
     .ws-btn { width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); color: #fff; cursor: pointer; font: inherit; text-align: left; }
-    .ws-btn .avatar { border-radius: 8px; background: #26316a; color: #c7d0ff; }
+    .ws-btn .avatar { border-radius: 8px; background: #1d4a42; color: #bfe9de; }
     .ws-btn small { color: var(--sidebar-text); display: block; font-size: 11.5px; }
     .side-foot { margin-top: auto; }
     .topbar { height: 60px; display: flex; align-items: center; gap: 8px; padding: 0 24px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 20; }
@@ -56,10 +55,7 @@ interface NavItem {
   `],
   template: `
     <aside class="sidebar" [class.open]="mobileOpen()">
-      <div class="brand">
-        <div class="brand-mark"><app-icon name="zap" [size]="17" /></div>
-        <div>{{ appName }}<small>VállalkozóOS</small></div>
-      </div>
+      <a class="brand" routerLink="/"><app-logo [size]="30" [inverse]="true" /></a>
 
       <div class="ws">
         <button class="ws-btn" type="button" (click)="toggle('ws')">
@@ -93,7 +89,7 @@ interface NavItem {
           }
         }
         @if (auth.user()?.is_super_admin) {
-          <div class="nav-label">VállalkozóOS</div>
+          <div class="nav-label">Admin</div>
           <a routerLink="/admin" routerLinkActive="active"><app-icon name="shield" /> {{ 'nav.admin' | t }}</a>
         }
       </nav>

@@ -1,6 +1,6 @@
-# ÜgyfélFlow CRM – frontend (Angular)
+# VállalkozóOS – frontend (Angular)
 
-> Munkanév: **ÜgyfélFlow** (VállalkozóOS). A megjelenített név az `src/environments/*.ts` `appName` mezőjében állítható.
+> Ügyfél- és munkakezelés szolgáltató vállalkozóknak. Arculat: mélyzöld (`--primary`) + borostyán kiemelés (`--accent`), Manrope címsorok, `src/styles.scss` tokenek, logó: `src/app/shared/logo.component.ts`.
 
 Angular 20 (standalone komponensek, signals), prémium üzleti megjelenés világos és sötét témával, futás közben váltható **magyar / angol / német** felülettel. A backend a `crm_back` Laravel API (`/api/v1`).
 
