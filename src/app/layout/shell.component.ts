@@ -167,13 +167,23 @@ interface NavItem {
                 @if (unread() > 0) { <button class="btn ghost sm" style="width:auto" (click)="markRead()">{{ 'nav.markRead' | t }}</button> }
               </div>
               @for (n of notifications(); track n.id) {
-                <a [routerLink]="n.data.lead_id ? ['/leads', n.data.lead_id] : ['/leads']" (click)="close()">
-                  <span class="dot" [style.background]="n.read_at ? 'transparent' : 'var(--primary)'"></span>
-                  <span class="spacer">
-                    <strong>{{ n.data.name }}</strong>
-                    <span class="subtle" style="display:block">{{ n.data.form }} · {{ n.created_at | dt: 'relative' }}</span>
-                  </span>
-                </a>
+                @if (n.data.quote_id) {
+                  <a [routerLink]="['/quotes', n.data.quote_id]" (click)="close()">
+                    <span class="dot" [style.background]="n.read_at ? 'transparent' : 'var(--accent, #f59e0b)'"></span>
+                    <span class="spacer">
+                      <strong>{{ n.data.type === 'quote_follow_up' ? ('quotes.notifications.follow_up' | t) + ': ' + n.data.name : n.data.name + ' ' + ('quotes.notifications.' + n.data.type.replace('quote_', '') | t) }}</strong>
+                      <span class="subtle" style="display:block">{{ n.data.number }} · {{ n.data.title }} · {{ n.created_at | dt: 'relative' }}</span>
+                    </span>
+                  </a>
+                } @else {
+                  <a [routerLink]="n.data.lead_id ? ['/leads', n.data.lead_id] : ['/leads']" (click)="close()">
+                    <span class="dot" [style.background]="n.read_at ? 'transparent' : 'var(--primary)'"></span>
+                    <span class="spacer">
+                      <strong>{{ n.data.name }}</strong>
+                      <span class="subtle" style="display:block">{{ n.data.form }} · {{ n.created_at | dt: 'relative' }}</span>
+                    </span>
+                  </a>
+                }
               } @empty {
                 <div class="empty small">{{ 'nav.noNotifications' | t }}</div>
               }
@@ -211,6 +221,7 @@ export class ShellComponent {
     { path: '/leads', icon: 'inbox', label: 'nav.leads' },
     { path: '/clients', icon: 'users', label: 'nav.clients' },
     { path: '/pipeline', icon: 'kanban', label: 'nav.pipeline' },
+    { path: '/quotes', icon: 'quote', label: 'nav.quotes' },
     { path: '/tasks', icon: 'checkSquare', label: 'nav.tasks' },
     { path: '/forms', icon: 'form', label: 'nav.forms' },
     { path: '/imports', icon: 'upload', label: 'nav.imports' },

@@ -208,10 +208,11 @@ export class ProfileSection {
   protected readonly locales = LOCALES;
   protected readonly themes = ['light', 'dark', 'system'] as const;
   protected readonly timezones = timezoneList(this.auth.user()?.timezone);
-  protected readonly prefs: { key: 'notify_task_reminders' | 'notify_daily_digest' | 'notify_new_leads'; label: string }[] = [
+  protected readonly prefs: { key: 'notify_task_reminders' | 'notify_daily_digest' | 'notify_new_leads' | 'notify_quote_updates'; label: string }[] = [
     { key: 'notify_task_reminders', label: 'security.notifyReminders' },
     { key: 'notify_daily_digest', label: 'security.notifyDigest' },
     { key: 'notify_new_leads', label: 'security.notifyLeads' },
+    { key: 'notify_quote_updates', label: 'security.notifyQuotes' },
   ];
 
   protected form: Partial<User> = { ...this.auth.user() };

@@ -33,6 +33,7 @@ import { TimelineComponent } from '../shared/timeline.component';
             } @else if (auth.canWrite()) {
               <button class="btn danger" (click)="remove(l)"><app-icon name="trash" [size]="16" /></button>
               <button class="btn" (click)="modal.set('edit')"><app-icon name="edit" [size]="16" /> {{ 'common.edit' | t }}</button>
+              <a class="btn" routerLink="/quotes/new" [queryParams]="{ lead_id: l.id }"><app-icon name="quote" [size]="16" /> {{ 'quotes.createFor' | t }}</a>
               <button class="btn primary" (click)="convert(l)" [disabled]="busy()"><app-icon name="star" [size]="16" /> {{ 'leads.convert' | t }}</button>
             }
           </div>

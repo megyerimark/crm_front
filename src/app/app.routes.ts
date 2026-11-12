@@ -13,6 +13,7 @@ export const routes: Routes = [
   { path: 'verify-email/confirm', loadComponent: () => import('./features/auth/signed-link.page').then((m) => m.SignedLinkPage), data: { kind: 'verify' } },
   { path: 'confirm-email-change', loadComponent: () => import('./features/auth/signed-link.page').then((m) => m.SignedLinkPage), data: { kind: 'email-change' } },
   { path: 'invite/:token', loadComponent: () => import('./features/auth/invite.page').then((m) => m.InvitePage) },
+  { path: 'q/:token', loadComponent: () => import('./features/quotes/public-quote.page').then((m) => m.PublicQuotePage) },
   { path: 'f/:slug', loadComponent: () => import('./features/public-form/public-form.page').then((m) => m.PublicFormPage) },
   { path: 'onboarding', canActivate: [authGuard], loadComponent: () => import('./features/auth/onboarding.page').then((m) => m.OnboardingPage) },
   {
@@ -26,6 +27,10 @@ export const routes: Routes = [
       { path: 'leads', loadComponent: () => import('./features/leads/leads.page').then((m) => m.LeadsPage) },
       { path: 'leads/:id', loadComponent: () => import('./features/leads/lead-detail.page').then((m) => m.LeadDetailPage) },
       { path: 'pipeline', loadComponent: () => import('./features/pipeline/pipeline.page').then((m) => m.PipelinePage) },
+      { path: 'quotes', loadComponent: () => import('./features/quotes/quotes.page').then((m) => m.QuotesPage) },
+      { path: 'quotes/new', loadComponent: () => import('./features/quotes/quote-editor.page').then((m) => m.QuoteEditorPage) },
+      { path: 'quotes/:id', loadComponent: () => import('./features/quotes/quote-detail.page').then((m) => m.QuoteDetailPage) },
+      { path: 'quotes/:id/edit', loadComponent: () => import('./features/quotes/quote-editor.page').then((m) => m.QuoteEditorPage) },
       { path: 'tasks', loadComponent: () => import('./features/tasks/tasks.page').then((m) => m.TasksPage) },
       { path: 'forms', loadComponent: () => import('./features/forms/forms.page').then((m) => m.FormsPage) },
       { path: 'forms/:id', loadComponent: () => import('./features/forms/form-editor.page').then((m) => m.FormEditorPage) },

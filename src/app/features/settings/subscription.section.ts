@@ -156,7 +156,7 @@ export class SubscriptionSection implements OnDestroy {
   protected readonly auth = inject(AuthService);
 
   protected readonly countries = COUNTRIES;
-  protected readonly limitKeys = ['users', 'clients', 'active_leads', 'forms', 'submissions_per_month', 'pipelines', 'active_tasks', 'automations', 'custom_fields'];
+  protected readonly limitKeys = ['users', 'clients', 'active_leads', 'forms', 'submissions_per_month', 'quotes_per_month', 'pipelines', 'active_tasks', 'automations', 'custom_fields'];
   protected readonly catalogue = signal<PlanCatalogue | null>(null);
   protected readonly overview = signal<BillingOverview | null>(null);
   protected readonly interval = signal<BillingInterval>('monthly');

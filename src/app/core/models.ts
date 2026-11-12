@@ -21,6 +21,7 @@ export interface User extends UserSummary {
   notify_task_reminders: boolean;
   notify_daily_digest: boolean;
   notify_new_leads: boolean;
+  notify_quote_updates: boolean;
   current_workspace_id: number | null;
   created_at: string;
 }
@@ -33,6 +34,7 @@ export interface Workspace {
   timezone: string;
   currency: string;
   locale: Locale;
+  quote_follow_up_days: number;
   owner_id: number;
   role: Role;
   plan: PlanKey;
@@ -417,7 +419,7 @@ export interface AuditLog {
 
 export interface AppNotification {
   id: string;
-  data: { type: string; lead_id?: number; name?: string; form?: string };
+  data: { type: string; lead_id?: number; quote_id?: number; number?: string; title?: string; name?: string; form?: string };
   read_at: string | null;
   created_at: string;
 }
@@ -442,4 +444,95 @@ export interface SupportTicket {
   closed_at: string | null;
   created_at: string;
   updated_at: string;
+}
+
+export type QuoteStatus = 'draft' | 'sent' | 'viewed' | 'accepted' | 'declined' | 'expired';
+
+export interface QuoteItem {
+  id?: number;
+  description: string;
+  quantity: number;
+  unit: string | null;
+  unit_price: number;
+  vat_rate: number;
+  net_amount?: number;
+}
+
+export interface QuoteEvent {
+  id: number;
+  type: string;
+  meta: Record<string, string | number> | null;
+  user: string | null;
+  created_at: string;
+}
+
+export interface Quote {
+  id: number;
+  number: string;
+  title: string;
+  status: QuoteStatus;
+  client_id: number | null;
+  client?: { id: number; name: string } | null;
+  lead_id: number | null;
+  lead?: { id: number; name: string } | null;
+  deal_id: number | null;
+  deal?: { id: number; title: string } | null;
+  owner_id: number | null;
+  owner?: UserSummary | null;
+  recipient_name: string | null;
+  recipient_email: string | null;
+  currency: string;
+  net_total: number;
+  vat_total: number;
+  gross_total: number;
+  valid_until: string | null;
+  introduction: string | null;
+  terms: string | null;
+  public_url: string | null;
+  sent_at: string | null;
+  first_viewed_at: string | null;
+  last_viewed_at: string | null;
+  view_count: number;
+  accepted_at: string | null;
+  accepted_by_name: string | null;
+  declined_at: string | null;
+  decline_reason: string | null;
+  expired_at: string | null;
+  follow_up_at: string | null;
+  follow_up_count: number;
+  source: string;
+  items?: QuoteItem[];
+  events?: QuoteEvent[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface QuoteStats {
+  counts: Record<QuoteStatus, number>;
+  awaiting_value: number;
+  accepted_value: number;
+  acceptance_rate: number | null;
+  follow_ups_due: number;
+}
+
+export interface PublicQuote {
+  number: string;
+  title: string;
+  status: QuoteStatus;
+  currency: string;
+  net_total: number;
+  vat_total: number;
+  gross_total: number;
+  valid_until: string | null;
+  is_expired: boolean;
+  introduction: string | null;
+  terms: string | null;
+  recipient_name: string | null;
+  sent_at: string | null;
+  accepted_at: string | null;
+  accepted_by_name: string | null;
+  declined_at: string | null;
+  items: QuoteItem[];
+  company: { name: string; address: string | null; tax_number: string | null; locale: string };
+  contact: { name: string; email: string } | null;
 }

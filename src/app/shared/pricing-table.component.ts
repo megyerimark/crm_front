@@ -4,10 +4,10 @@ import { BillingInterval, PlanDefinition, PlanKey } from '../core/models';
 import { TranslatePipe } from '../core/i18n/t.pipe';
 import { IconComponent } from './icon.component';
 
-const LIMIT_KEYS = ['users', 'clients', 'active_leads', 'forms', 'submissions_per_month', 'pipelines', 'active_tasks', 'automations', 'custom_fields'];
+const LIMIT_KEYS = ['users', 'clients', 'active_leads', 'forms', 'submissions_per_month', 'quotes_per_month', 'pipelines', 'active_tasks', 'automations', 'custom_fields'];
 const HIGHLIGHT_FEATURES: Record<PlanKey, string[]> = {
   free: ['advanced_search', 'utm_tracking', 'email_reminders'],
-  pro: ['advanced_search', 'import_update_duplicates', 'custom_form_fields', 'remove_branding', 'utm_tracking', 'advanced_reports', 'excel_export', 'email_reminders'],
+  pro: ['advanced_search', 'import_update_duplicates', 'custom_form_fields', 'remove_branding', 'utm_tracking', 'advanced_reports', 'excel_export', 'email_reminders', 'quote_follow_ups'],
   business: ['auto_assignment', 'team', 'team_reports'],
 };
 

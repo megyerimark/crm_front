@@ -38,6 +38,8 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
   ] },
   { group: 'sales', rows: [
     { label: 'plan.limits.pipelines', kind: 'limit', key: 'pipelines' },
+    { label: 'plan.limits.quotes_per_month', kind: 'limit', key: 'quotes_per_month' },
+    { label: 'plan.feature.quote_follow_ups', kind: 'feature', key: 'quote_follow_ups' },
     { label: 'plan.limits.automations', kind: 'limit', key: 'automations' },
     { label: 'plan.feature.email_reminders', kind: 'feature', key: 'email_reminders' },
     { label: 'plan.feature.auto_assignment', kind: 'feature', key: 'auto_assignment' },

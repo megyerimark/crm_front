@@ -38,6 +38,11 @@ import { timezoneList, UI } from '../../shared/ui';
           <label>{{ 'settings.defaultLanguage' | t }}</label>
           <select class="select" name="locale" [(ngModel)]="form.locale">@for (l of locales; track l.code) { <option [value]="l.code">{{ l.label }}</option> }</select>
         </div>
+        <div class="field">
+          <label for="ws_follow">{{ 'settings.quoteFollowUpDays' | t }}</label>
+          <input class="input" id="ws_follow" type="number" min="1" max="30" name="quote_follow_up_days" [(ngModel)]="form.quote_follow_up_days" />
+          @if (errors()['quote_follow_up_days']) { <span class="error-text">{{ errors()['quote_follow_up_days'] }}</span> }
+        </div>
         <div class="full row end"><button class="btn primary" type="submit">{{ 'common.save' | t }}</button></div>
       </form>
     </div>
@@ -56,8 +61,8 @@ export class WorkspaceSection {
   protected readonly errors = signal<Record<string, string>>({});
 
   save(): void {
-    const { name, country, currency, timezone, locale } = this.form;
-    this.api.patch<{ data: Workspace }>('workspace', { name, country, currency, timezone, locale }).subscribe({
+    const { name, country, currency, timezone, locale, quote_follow_up_days } = this.form;
+    this.api.patch<{ data: Workspace }>('workspace', { name, country, currency, timezone, locale, quote_follow_up_days }).subscribe({
       next: (res) => {
         this.auth.setWorkspaces(this.auth.workspaces().map((w) => (w.id === res.data.id ? res.data : w)));
         this.errors.set({});

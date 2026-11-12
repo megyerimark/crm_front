@@ -36,6 +36,7 @@ import { TimelineComponent } from '../shared/timeline.component';
             <div class="row">
               <button class="btn danger" (click)="remove(c)"><app-icon name="trash" [size]="16" /></button>
               <button class="btn" (click)="modal.set('edit')"><app-icon name="edit" [size]="16" /> {{ 'common.edit' | t }}</button>
+              <a class="btn" routerLink="/quotes/new" [queryParams]="{ client_id: c.id }"><app-icon name="quote" [size]="16" /> {{ 'quotes.createFor' | t }}</a>
             </div>
           }
         </div>

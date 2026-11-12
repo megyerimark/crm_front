@@ -250,6 +250,7 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .banner.warning { background: var(--warning-soft); color: var(--warning); }
 .banner.gold { background: var(--gold-soft); color: var(--gold); }
 .banner.danger { background: var(--danger-soft); color: var(--danger); }
+.banner.success { background: var(--success-soft); color: var(--success); }
 
 /* Modal */
 .backdrop { position: fixed; inset: 0; background: rgba(8, 12, 25, 0.55); display: flex; align-items: flex-start; justify-content: center; padding: 6vh 16px; z-index: 50; overflow-y: auto; animation: fade .12s ease-out; }
