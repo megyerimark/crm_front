@@ -31,6 +31,12 @@ A jogosultságot és a csomaglimiteket mindig a backend ellenőrzi; a felület c
 - A csomagválasztás a regisztrációig követi a felhasználót (`/register?plan=business&interval=yearly`); a 14 napos Pro próba bankkártya nélkül indul.
 - Beállítások → Előfizetés: jelenlegi csomag és felhasználás, Stripe Checkout, csomag- és ciklusváltás, lemondás/visszavonás, Stripe ügyfélportál, számlázási adatok (adószám), Számlázz.hu e-számlák PDF-ben.
 
+## Fiókbiztonság
+
+- Regisztráció után e-mail-megerősítés (`/verify-email`, `/verify-email/confirm`); megerősítés nélkül az alkalmazás nem érhető el. Meghívó elfogadása megerősíti a címet.
+- Bejelentkezés kétlépcsős azonosítással (TOTP kód vagy visszaállító kód), elfelejtett jelszó (`/forgot-password`, `/reset-password`).
+- Beállítások → Profilom: e-mail-cím módosítás megerősítéssel, jelszó, 2FA be/ki (QR-kód, visszaállító kódok), értesítési beállítások, GDPR adatexport és fióktörlés. Csapat oldalon tulajdonjog átadása.
+
 ## Publikus űrlap beágyazása
 
 ```html

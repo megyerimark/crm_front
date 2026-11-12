@@ -41,3 +41,9 @@ export function toLocalInput(value: string | null | undefined): string {
 export function fromLocalInput(value: string): string | null {
   return value ? new Date(value).toISOString() : null;
 }
+
+/** IANA time zones offered in selects; always contains UTC and the values already stored. */
+export function timezoneList(...current: (string | null | undefined)[]): string[] {
+  const supported = (Intl as unknown as { supportedValuesOf?: (key: string) => string[] }).supportedValuesOf?.('timeZone') ?? ['Europe/Budapest', 'Europe/Vienna', 'Europe/Berlin'];
+  return [...new Set([...current.filter((tz): tz is string => !!tz), 'UTC', ...supported])].sort();
+}

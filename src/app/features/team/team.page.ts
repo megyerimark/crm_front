@@ -64,6 +64,20 @@ import { UI } from '../../shared/ui';
         </table></div>
       </div>
 
+      @if (auth.role() === 'owner' && otherMembers().length) {
+        <div class="card mt">
+          <div class="card-header"><h3>{{ 'security.transferTitle' | t }}</h3></div>
+          <div class="card-body row wrap">
+            <span class="muted spacer">{{ 'security.transferText' | t }}</span>
+            <select class="select" style="width:auto" [(ngModel)]="newOwner">
+              <option [ngValue]="null">–</option>
+              @for (m of otherMembers(); track m.id) { <option [ngValue]="m.id">{{ m.name }}</option> }
+            </select>
+            <button class="btn" [disabled]="!newOwner" (click)="transfer()">{{ 'security.transferButton' | t }}</button>
+          </div>
+        </div>
+      }
+
       @if (invitations().length) {
         <div class="card mt">
           <div class="card-header"><h3>{{ 'team.invitations' | t }}</h3></div>
@@ -97,6 +111,7 @@ export class TeamPage {
   protected readonly busy = signal(false);
   protected readonly error = signal('');
   protected email = '';
+  protected newOwner: number | null = null;
   protected role: Role = 'member';
 
   ngOnInit(): void {
@@ -140,6 +155,21 @@ export class TeamPage {
         this.auth.refreshSubscription();
       });
     }
+  }
+
+  otherMembers(): Member[] {
+    return this.members.members().filter((m) => m.id !== this.auth.user()?.id);
+  }
+
+  transfer(): void {
+    const member = this.otherMembers().find((m) => m.id === this.newOwner);
+    if (!member || !confirm(this.i18n.t('security.transferConfirm', { name: member.name }))) return;
+    this.api.post('team/owner', { user_id: member.id }).subscribe(() => {
+      this.toast.success(this.i18n.t('security.transferred'));
+      this.members.load(true);
+      this.auth.loadMe().subscribe();
+      this.newOwner = null;
+    });
   }
 
   revoke(invitation: Invitation): void {

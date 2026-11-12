@@ -6,6 +6,9 @@ export const authGuard: CanActivateFn = async (_route, state) => {
   const auth = inject(AuthService);
   const router = inject(Router);
   if (await auth.ensureLoaded()) {
+    if (!auth.isVerified()) {
+      return router.parseUrl('/verify-email');
+    }
     if (!auth.workspaceId() && !state.url.startsWith('/onboarding') && !state.url.startsWith('/admin')) {
       return router.parseUrl('/onboarding');
     }
@@ -31,4 +34,13 @@ export const superAdminGuard: CanActivateFn = async () => {
   const auth = inject(AuthService);
   await auth.ensureLoaded();
   return auth.user()?.is_super_admin ? true : inject(Router).parseUrl('/');
+};
+
+/** Logged in, verified or not (the "check your inbox" page). */
+export const sessionGuard: CanActivateFn = async () => {
+  const auth = inject(AuthService);
+  if (!(await auth.ensureLoaded())) {
+    return inject(Router).parseUrl('/login');
+  }
+  return auth.isVerified() ? inject(Router).parseUrl('/') : true;
 };

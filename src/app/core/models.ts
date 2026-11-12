@@ -14,6 +14,13 @@ export interface User extends UserSummary {
   theme: Theme;
   timezone: string | null;
   is_super_admin: boolean;
+  email_verified_at: string | null;
+  pending_email: string | null;
+  two_factor_enabled: boolean;
+  two_factor_recovery_codes_left: number;
+  notify_task_reminders: boolean;
+  notify_daily_digest: boolean;
+  notify_new_leads: boolean;
   current_workspace_id: number | null;
   created_at: string;
 }
