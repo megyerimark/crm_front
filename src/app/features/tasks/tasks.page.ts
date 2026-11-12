@@ -77,7 +77,13 @@ function dayKey(date: Date): string {
               @if (task.status === 'in_progress') { <span class="badge info">{{ 'tasks.statuses.in_progress' | t }}</span> }
               <span class="badge nowrap" [class.danger]="task.is_overdue">{{ task.due_at ? (task.due_at | dt) : ('tasks.noDue' | t) }}</span>
             </div>
-          } @empty { <div class="empty"><h3>{{ 'common.empty' | t }}</h3></div> }
+          } @empty {
+            @if (search || priority || assignee || overdue || status !== 'open') {
+              <app-empty-state illustration="search" [title]="'empty.noResultsTitle' | t" [text]="'empty.noResultsText' | t" />
+            } @else {
+              <app-empty-state illustration="tasks" [title]="'empty.tasksTitle' | t" [text]="'empty.tasksText' | t" />
+            }
+          }
           <app-pagination [meta]="page()?.meta ?? null" (page)="goTo($event)" (perPage)="perPage = $event; reload()" />
         </div>
       } @else {
@@ -101,7 +107,7 @@ function dayKey(date: Date): string {
                   <span [style.text-decoration]="task.status === 'done' ? 'line-through' : null">{{ task.title }}</span>
                   <span class="subtle">{{ task.client?.name ?? task.lead?.name ?? '' }}</span>
                 </div>
-              } @empty { <div class="empty">{{ 'common.empty' | t }}</div> }
+              } @empty { <app-empty-state illustration="tasks" [compact]="true" [title]="'empty.tasksTitle' | t" /> }
             </div>
           } @else {
             <div class="calendar">

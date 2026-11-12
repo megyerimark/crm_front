@@ -27,7 +27,7 @@ import { TimelineComponent } from '../shared/timeline.component';
               <div class="row wrap mt-sm">
                 <span class="badge" [class]="'badge ' + statusClass(c.status)">{{ 'clients.' + c.status | t }}</span>
                 <span class="badge">{{ (c.type === 'company' ? 'clients.companyType' : 'clients.person') | t }}</span>
-                @if (c.lead_id) { <a class="badge gold" [routerLink]="['/leads', c.lead_id]">⭐ {{ 'clients.fromLead' | t }}</a> }
+                @if (c.lead_id) { <a class="badge solid" [routerLink]="['/leads', c.lead_id]"> {{ 'clients.fromLead' | t }}</a> }
                 @for (tag of c.tags; track tag) { <span class="tag">{{ tag }}</span> }
               </div>
             </div>

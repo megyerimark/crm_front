@@ -1,14 +1,15 @@
 import { TranslatePipe } from '../core/i18n/t.pipe';
+import { EmptyStateComponent } from './empty-state.component';
 import { DatePipe, InitialsPipe, MoneyPipe, NumberPipe } from './format.pipes';
 import { IconComponent } from './icon.component';
 import { ModalComponent } from './modal.component';
 import { PaginationComponent } from './pagination.component';
 
 /** Common imports for feature components. */
-export const UI = [TranslatePipe, DatePipe, MoneyPipe, NumberPipe, InitialsPipe, IconComponent, ModalComponent, PaginationComponent] as const;
+export const UI = [TranslatePipe, DatePipe, MoneyPipe, NumberPipe, InitialsPipe, IconComponent, ModalComponent, PaginationComponent, EmptyStateComponent] as const;
 
 export function leadStatusClass(status: string): string {
-  return { new: 'primary', contacted: 'info', qualified: 'success', unqualified: '', converted: 'gold' }[status] ?? '';
+  return { new: 'primary', contacted: 'info', qualified: 'success', unqualified: '', converted: 'solid' }[status] ?? '';
 }
 
 export function clientStatusClass(status: string): string {

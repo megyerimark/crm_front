@@ -118,12 +118,12 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
     .why .tile { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; }
     .why .tile h3 { color: #fff; }
     .why .tile p { color: #a8c2ba; }
-    .why .ic { background: rgba(242,165,22,.14); color: var(--accent); }
+    .why .ic { background: rgba(127,224,198,.12); color: #7fe0c6; }
     .setup { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; align-items: start; }
     .setup ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
     .setup li { display: flex; gap: 14px; align-items: flex-start; padding: 18px; }
     .setup li .n { width: 32px; height: 32px; border-radius: 10px; background: var(--primary); color: var(--primary-text); font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .roadmap { padding: 24px; background: linear-gradient(160deg, var(--gold-soft), var(--surface)); }
+    .roadmap { padding: 24px; background: linear-gradient(160deg, var(--primary-soft), var(--surface)); }
     .roadmap ul { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-direction: column; gap: 10px; }
     .roadmap li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
     .toggle { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 34px; }
@@ -282,7 +282,7 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
           <div class="card roadmap">
             <h3>{{ 'landing.roadmapTitle' | t }}</h3>
             <p class="muted mt-sm">{{ 'landing.roadmapText' | t }}</p>
-            <ul>@for (item of roadmap(); track item) { <li>{{ item }} <span class="badge gold">{{ 'landing.soon' | t }}</span></li> }</ul>
+            <ul>@for (item of roadmap(); track item) { <li>{{ item }} <span class="badge primary">{{ 'landing.soon' | t }}</span></li> }</ul>
           </div>
         </div>
       </div>

@@ -40,7 +40,11 @@ import { UI } from '../../shared/ui';
             </div>
           </div>
         } @empty {
-          <div class="card span-2"><div class="empty"><app-icon name="form" [size]="32" /><h3 class="mt-sm">{{ 'dashboard.stepForm' | t }}</h3></div></div>
+          <div class="card" style="grid-column:1/-1">
+            <app-empty-state illustration="forms" [title]="'empty.formsTitle' | t" [text]="'empty.formsText' | t">
+              @if (auth.canWrite()) { <button class="btn primary" (click)="create()" [disabled]="busy()"><app-icon name="plus" [size]="16" /> {{ 'forms.new' | t }}</button> }
+            </app-empty-state>
+          </div>
         }
       </div>
     </div>

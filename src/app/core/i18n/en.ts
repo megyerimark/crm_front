@@ -19,7 +19,7 @@ export const en: typeof hu = {
     dashboard: 'Dashboard', clients: 'Clients', leads: 'Leads', pipeline: 'Pipeline', tasks: 'Tasks', calendar: 'Calendar',
     forms: 'Forms', imports: 'Import', reports: 'Reports', team: 'Team', settings: 'Settings', admin: 'Super Admin',
     workspace: 'Workspace', newWorkspace: 'New workspace', notifications: 'Notifications', noNotifications: 'No new notifications.',
-    markRead: 'Mark all read',
+    menu: 'Menu', markRead: 'Mark all read',
   },
   auth: {
     login: 'Log in', register: 'Sign up', email: 'E-mail address', password: 'Password', passwordConfirm: 'Confirm password',
@@ -199,6 +199,16 @@ export const en: typeof hu = {
     intended: 'You chose the {plan} plan when signing up. Subscribe now – your remaining trial days are kept.', keepTrial: 'If you subscribe during the trial, the first charge happens when the trial ends.',
     downgradeTitle: 'Note: after switching these will be over the limits', securePayment: 'Secure payment via Stripe',
     statuses: { active: 'Active', trialing: 'Trial', past_due: 'Past due', canceled: 'Cancelled', incomplete: 'Incomplete' },
+  },
+  empty: {
+    leadsTitle: 'No leads yet', leadsText: 'Create a quote request form and share its link – new enquiries will arrive here.', leadsCta: 'Create a form',
+    clientsTitle: 'No clients yet', clientsText: 'Bring in your existing list from Excel, or add a client manually.', clientsCta: 'Import a list',
+    tasksTitle: 'No open tasks', tasksText: 'Every call-back and task shows up here by due date.',
+    formsTitle: 'No forms yet', formsText: 'A quote request form takes 2 minutes and can be embedded on your website or shared as a link.',
+    importsTitle: 'No imports yet', importsText: 'Previous imports and their results appear here.',
+    noResultsTitle: 'No results', noResultsText: 'Try a different search or clear the filters.',
+    upcomingTitle: 'Nothing due soon', upcomingText: 'Nice work – every call-back is up to date.',
+    activityTitle: 'Nothing logged yet', activityText: 'Calls, e-mails and meetings appear here in chronological order.',
   },
   errors: { server: 'Something went wrong. Please try again later.', forbidden: 'You are not allowed to do this.', notFound: 'Page not found.' },
 };

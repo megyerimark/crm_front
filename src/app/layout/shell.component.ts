@@ -26,11 +26,11 @@ interface NavItem {
     :host { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; }
     .sidebar { background: var(--sidebar); color: var(--sidebar-text); display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; padding: 18px 12px; gap: 18px; z-index: 30; }
     .brand { display: flex; align-items: center; padding: 2px 8px; text-decoration: none !important; }
-    nav { display: flex; flex-direction: column; gap: 2px; overflow-y: auto; }
-    nav a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: var(--sidebar-text); font-weight: 500; text-decoration: none; }
-    nav a:hover { background: rgba(255,255,255,.05); color: #fff; }
-    nav a.active { background: var(--sidebar-active); color: #fff; }
-    nav a.active app-icon { color: var(--accent); }
+    .sidebar nav { display: flex; flex-direction: column; gap: 2px; overflow-y: auto; }
+    .sidebar nav a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: var(--sidebar-text); font-weight: 500; text-decoration: none; }
+    .sidebar nav a:hover { background: rgba(255,255,255,.05); color: #fff; }
+    .sidebar nav a.active { background: var(--sidebar-active); color: #fff; }
+    .sidebar nav a.active app-icon { color: var(--nav-active-icon); }
     .nav-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: #5e6890; padding: 12px 12px 4px; }
     .ws { position: relative; }
     .ws-btn { width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); color: #fff; cursor: pointer; font: inherit; text-align: left; }
@@ -45,12 +45,24 @@ interface NavItem {
     .notif { width: 340px; max-height: 420px; overflow-y: auto; }
     .count { position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; border-radius: 8px; background: var(--danger); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; padding: 0 4px; }
     .mobile-toggle { display: none; }
+    .tabbar { display: none; }
+    .scrim { display: none; }
+    @media (max-width: 960px) { .scrim { display: block; position: fixed; inset: 0; z-index: 29; background: rgba(6, 18, 15, .45); } }
     @media (max-width: 960px) {
       :host { grid-template-columns: 1fr; }
       .sidebar { position: fixed; left: 0; top: 0; width: 260px; transform: translateX(-100%); transition: transform .2s; box-shadow: var(--shadow-lg); }
       .sidebar.open { transform: none; }
       .mobile-toggle { display: inline-flex; }
       .topbar { padding: 0 16px; }
+    }
+    @media (max-width: 720px) {
+      .mobile-toggle { display: none; }
+      main { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+      .tabbar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; transform: translateZ(0); height: calc(64px + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); background: var(--surface); border-top: 1px solid var(--border); box-shadow: 0 -6px 20px rgba(0,0,0,.06); }
+      .tabbar a, .tabbar button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font: inherit; font-size: 10.5px; font-weight: 600; color: var(--text-3); background: none; border: 0; text-decoration: none !important; min-width: 0; padding: 0 2px; }
+      .tabbar span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .tabbar a.active { color: var(--primary); }
+      .tabbar a.active app-icon { transform: translateY(-1px); }
     }
   `],
   template: `
@@ -113,6 +125,7 @@ interface NavItem {
       </div>
     </aside>
 
+    @if (mobileOpen()) { <div class="scrim" (click)="mobileOpen.set(false)"></div> }
     <main>
       <header class="topbar">
         <button class="btn ghost icon mobile-toggle" type="button" (click)="mobileOpen.set(!mobileOpen())" aria-label="Menu"><app-icon name="menu" /></button>
@@ -168,6 +181,13 @@ interface NavItem {
       </header>
       <router-outlet />
     </main>
+
+    <nav class="tabbar" [attr.aria-label]="'nav.dashboard' | t">
+      @for (item of tabs; track item.path) {
+        <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: !!item.exact }"><app-icon [name]="item.icon" [size]="21" /><span>{{ item.label | t }}</span></a>
+      }
+      <button type="button" (click)="mobileOpen.set(!mobileOpen())"><app-icon name="menu" [size]="21" /><span>{{ 'nav.menu' | t }}</span></button>
+    </nav>
   `,
 })
 export class ShellComponent {
@@ -195,6 +215,14 @@ export class ShellComponent {
     { path: '/reports', icon: 'chart', label: 'nav.reports' },
     { path: '/team', icon: 'team', label: 'nav.team' },
     { path: '/settings', icon: 'settings', label: 'nav.settings' },
+  ];
+
+  /** Bottom tab bar on phones: the four most used screens. */
+  protected readonly tabs: NavItem[] = [
+    { path: '/', icon: 'dashboard', label: 'nav.dashboard', exact: true },
+    { path: '/leads', icon: 'inbox', label: 'nav.leads' },
+    { path: '/tasks', icon: 'checkSquare', label: 'nav.tasks' },
+    { path: '/clients', icon: 'users', label: 'nav.clients' },
   ];
 
   protected readonly planLabel = computed(() => {

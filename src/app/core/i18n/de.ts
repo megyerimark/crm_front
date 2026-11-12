@@ -19,7 +19,7 @@ export const de: typeof hu = {
     dashboard: 'Übersicht', clients: 'Kunden', leads: 'Interessenten', pipeline: 'Vertrieb', tasks: 'Aufgaben', calendar: 'Kalender',
     forms: 'Formulare', imports: 'Import', reports: 'Berichte', team: 'Team', settings: 'Einstellungen', admin: 'Super Admin',
     workspace: 'Arbeitsbereich', newWorkspace: 'Neuer Arbeitsbereich', notifications: 'Benachrichtigungen', noNotifications: 'Keine neuen Benachrichtigungen.',
-    markRead: 'Alle gelesen',
+    menu: 'Menü', markRead: 'Alle gelesen',
   },
   auth: {
     login: 'Anmelden', register: 'Registrieren', email: 'E-Mail-Adresse', password: 'Passwort', passwordConfirm: 'Passwort bestätigen',
@@ -199,6 +199,16 @@ export const de: typeof hu = {
     intended: 'Bei der Registrierung haben Sie den Tarif {plan} gewählt. Jetzt abonnieren – die restlichen Testtage bleiben erhalten.', keepTrial: 'Beim Abonnieren während des Tests erfolgt die erste Abbuchung erst am Testende.',
     downgradeTitle: 'Hinweis: Nach dem Wechsel liegen diese Daten über dem Limit', securePayment: 'Sichere Zahlung über Stripe',
     statuses: { active: 'Aktiv', trialing: 'Test', past_due: 'Zahlung überfällig', canceled: 'Gekündigt', incomplete: 'Ausstehend' },
+  },
+  empty: {
+    leadsTitle: 'Noch keine Interessenten', leadsText: 'Erstellen Sie ein Anfrageformular und teilen Sie den Link – neue Anfragen landen hier.', leadsCta: 'Formular erstellen',
+    clientsTitle: 'Noch keine Kunden', clientsText: 'Importieren Sie Ihre bestehende Liste aus Excel oder legen Sie einen Kunden manuell an.', clientsCta: 'Liste importieren',
+    tasksTitle: 'Keine offenen Aufgaben', tasksText: 'Alle Rückrufe und Aufgaben erscheinen hier nach Fälligkeit.',
+    formsTitle: 'Noch keine Formulare', formsText: 'Ein Anfrageformular ist in 2 Minuten fertig und lässt sich einbetten oder als Link teilen.',
+    importsTitle: 'Noch keine Importe', importsText: 'Frühere Importe und ihre Ergebnisse erscheinen hier.',
+    noResultsTitle: 'Keine Treffer', noResultsText: 'Versuchen Sie eine andere Suche oder setzen Sie die Filter zurück.',
+    upcomingTitle: 'Nichts fällig', upcomingText: 'Gute Arbeit – alle Rückrufe sind erledigt.',
+    activityTitle: 'Noch nichts erfasst', activityText: 'Anrufe, E-Mails und Termine erscheinen hier chronologisch.',
   },
   errors: { server: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.', forbidden: 'Dazu sind Sie nicht berechtigt.', notFound: 'Seite nicht gefunden.' },
 };

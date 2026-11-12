@@ -54,7 +54,7 @@ import { UI } from '../../shared/ui';
                     <select class="select sm" style="width:auto" [ngModel]="m.role" (ngModelChange)="changeRole(m, $event)">
                       @for (r of roles; track r) { <option [value]="r">{{ 'roles.' + r | t }}</option> }
                     </select>
-                  } @else { <span class="badge" [class.gold]="m.role === 'owner'">{{ 'roles.' + m.role | t }}</span> }
+                  } @else { <span class="badge" [class.solid]="m.role === 'owner'">{{ 'roles.' + m.role | t }}</span> }
                 </td>
                 <td class="subtle">{{ m.joined_at | dt: 'date' }}</td>
                 <td class="right">@if (auth.isAdmin() && m.role !== 'owner' && m.id !== auth.user()?.id) { <button class="btn sm danger" (click)="remove(m)">{{ 'team.remove' | t }}</button> }</td>

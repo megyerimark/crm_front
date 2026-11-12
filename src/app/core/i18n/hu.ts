@@ -17,7 +17,7 @@ export const hu = {
     dashboard: 'Áttekintés', clients: 'Ügyfelek', leads: 'Érdeklődők', pipeline: 'Értékesítés', tasks: 'Teendők', calendar: 'Naptár',
     forms: 'Űrlapok', imports: 'Import', reports: 'Riportok', team: 'Csapat', settings: 'Beállítások', admin: 'Super Admin',
     workspace: 'Munkaterület', newWorkspace: 'Új munkaterület', notifications: 'Értesítések', noNotifications: 'Nincs új értesítés.',
-    markRead: 'Mind olvasott',
+    menu: 'Menü', markRead: 'Mind olvasott',
   },
   auth: {
     login: 'Bejelentkezés', register: 'Regisztráció', email: 'E-mail-cím', password: 'Jelszó', passwordConfirm: 'Jelszó megerősítése',
@@ -197,6 +197,16 @@ export const hu = {
     intended: 'A regisztrációkor a(z) {plan} csomagot választottad. Fizess elő most – a hátralévő próbanapok megmaradnak.', keepTrial: 'A próbaidő alatt indított előfizetésnél az első terhelés a próba végén történik.',
     downgradeTitle: 'Figyelem: a váltás után ezek a limit felett lesznek', securePayment: 'Biztonságos fizetés a Stripe-on keresztül',
     statuses: { active: 'Aktív', trialing: 'Próbaidő', past_due: 'Lejárt fizetés', canceled: 'Lemondva', incomplete: 'Függőben' },
+  },
+  empty: {
+    leadsTitle: 'Még nincs érdeklődőd', leadsText: 'Készíts egy ajánlatkérő űrlapot, és oszd meg a linkjét – az új megkeresések ide érkeznek.', leadsCta: 'Űrlap létrehozása',
+    clientsTitle: 'Még nincs ügyfeled', clientsText: 'Hozd be a meglévő listádat Excelből, vagy vegyél fel egy ügyfelet kézzel.', clientsCta: 'Lista importálása',
+    tasksTitle: 'Nincs nyitott teendő', tasksText: 'Minden visszahívás és feladat itt jelenik meg határidő szerint.',
+    formsTitle: 'Még nincs űrlapod', formsText: 'Egy ajánlatkérő űrlap 2 perc alatt elkészül, és beágyazható a weboldaladba vagy megosztható linkként.',
+    importsTitle: 'Még nem importáltál', importsText: 'A korábbi importok és eredményeik itt jelennek meg.',
+    noResultsTitle: 'Nincs találat', noResultsText: 'Próbálj más keresést, vagy töröld a szűrőket.',
+    upcomingTitle: 'Nincs közelgő teendő', upcomingText: 'Szép munka – minden visszahívás naprakész.',
+    activityTitle: 'Még nincs rögzített esemény', activityText: 'A hívások, e-mailek és találkozók itt jelennek meg időrendben.',
   },
   errors: { server: 'Váratlan hiba történt. Próbáld újra később.', forbidden: 'Ehhez nincs jogosultságod.', notFound: 'Az oldal nem található.' },
 };

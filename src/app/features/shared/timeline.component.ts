@@ -42,7 +42,7 @@ const ICONS: Record<string, string> = {
           </div>
         </div>
       } @empty {
-        <div class="empty small">{{ 'activity.empty' | t }}</div>
+        <app-empty-state illustration="activity" [compact]="true" [title]="'empty.activityTitle' | t" [text]="'empty.activityText' | t" />
       }
     </div>
   `,
