@@ -10,7 +10,7 @@ export const authGuard: CanActivateFn = async (_route, state) => {
       return router.parseUrl('/verify-email');
     }
     if (!auth.workspaceId() && !state.url.startsWith('/onboarding') && !state.url.startsWith('/admin')) {
-      return router.parseUrl('/onboarding');
+      return router.parseUrl(auth.user()?.is_super_admin ? '/admin' : '/onboarding');
     }
     return true;
   }

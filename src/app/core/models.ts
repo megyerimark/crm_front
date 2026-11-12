@@ -421,3 +421,25 @@ export interface AppNotification {
   read_at: string | null;
   created_at: string;
 }
+
+export type TicketStatus = 'open' | 'answered' | 'pending' | 'closed';
+export type TicketPriority = 'low' | 'normal' | 'high' | 'urgent';
+
+export interface SupportTicket {
+  id: number;
+  subject: string;
+  category: string;
+  status: TicketStatus;
+  priority: TicketPriority;
+  plan: PlanKey | null;
+  workspace?: { id: number; name: string } | null;
+  user?: UserSummary | null;
+  assignee?: UserSummary | null;
+  messages?: { id: number; is_staff: boolean; author: string | null; body: string; created_at: string }[];
+  messages_count?: number;
+  last_customer_reply_at: string | null;
+  last_staff_reply_at: string | null;
+  closed_at: string | null;
+  created_at: string;
+  updated_at: string;
+}

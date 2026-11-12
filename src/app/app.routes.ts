@@ -31,6 +31,7 @@ export const routes: Routes = [
       { path: 'forms/:id', loadComponent: () => import('./features/forms/form-editor.page').then((m) => m.FormEditorPage) },
       { path: 'imports', loadComponent: () => import('./features/imports/imports.page').then((m) => m.ImportsPage) },
       { path: 'reports', loadComponent: () => import('./features/reports/reports.page').then((m) => m.ReportsPage) },
+      { path: 'support', loadComponent: () => import('./features/support/support.page').then((m) => m.SupportPage) },
       { path: 'team', loadComponent: () => import('./features/team/team.page').then((m) => m.TeamPage) },
       {
         path: 'settings',

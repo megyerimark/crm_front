@@ -18,7 +18,7 @@ export const de: typeof hu = {
   nav: {
     dashboard: 'Übersicht', clients: 'Kunden', leads: 'Interessenten', pipeline: 'Vertrieb', tasks: 'Aufgaben', calendar: 'Kalender',
     forms: 'Formulare', imports: 'Import', reports: 'Berichte', team: 'Team', settings: 'Einstellungen', admin: 'Super Admin',
-    workspace: 'Arbeitsbereich', newWorkspace: 'Neuer Arbeitsbereich', notifications: 'Benachrichtigungen', noNotifications: 'Keine neuen Benachrichtigungen.',
+    support: 'Support', workspace: 'Arbeitsbereich', newWorkspace: 'Neuer Arbeitsbereich', notifications: 'Benachrichtigungen', noNotifications: 'Keine neuen Benachrichtigungen.',
     menu: 'Menü', markRead: 'Alle gelesen',
   },
   auth: {
@@ -228,6 +228,26 @@ export const de: typeof hu = {
     deleteTitle: 'Konto löschen', deleteText: 'Ihr Konto und alle Daten Ihrer eigenen Arbeitsbereiche werden dauerhaft gelöscht, Ihr Abonnement endet sofort. Ausgestellte Rechnungen bewahren wir gesetzeskonform auf. Dies kann nicht rückgängig gemacht werden.', deleteTeamHint: 'Hat Ihr Arbeitsbereich weitere Mitglieder, übertragen Sie zuerst die Inhaberschaft auf der Team-Seite.',
     deleteConfirm: 'Geben Sie zur Bestätigung {word} ein', deleteWord: 'LÖSCHEN', deleteButton: 'Konto endgültig löschen', deleted: 'Ihr Konto wurde gelöscht.',
     transferTitle: 'Inhaberschaft übertragen', transferText: 'Ein anderes Mitglied wird Inhaber des Arbeitsbereichs; Sie bleiben Administrator.', transferButton: 'Übertragen', transferConfirm: 'Inhaberschaft an {name} übertragen?', transferred: 'Inhaberschaft übertragen.',
+  },
+  support: {
+    title: 'Support', subtitle: 'Eine Frage oder funktioniert etwas nicht? Schreiben Sie uns, wir antworten.', new: 'Neue Anfrage', subject: 'Betreff', category: 'Kategorie', message: 'Nachricht',
+    send: 'Senden', reply: 'Antworten', replyPlaceholder: 'Ihre Antwort…', close: 'Schließen', closed: 'Geschlossen', staff: 'VállalkozóOS Support', you: 'Sie', sent: 'Erhalten – wir antworten bald.',
+    priorityNote: 'Aufgrund Ihres Tarifs hat Ihre Anfrage die Priorität: {priority}.', empty: 'Noch keine Anfragen. Wenn Sie nicht weiterkommen, schreiben Sie uns!', messages: 'Nachrichten',
+    categories: { question: 'Frage', bug: 'Fehlermeldung', billing: 'Abrechnung', feature: 'Verbesserungsvorschlag', account: 'Konto' },
+    statuses: { open: 'Wartet auf Antwort', answered: 'Beantwortet', pending: 'In Bearbeitung', closed: 'Geschlossen' },
+    priorities: { low: 'Niedrig', normal: 'Normal', high: 'Hoch', urgent: 'Dringend' },
+  },
+  platform: {
+    tabs: { overview: 'Übersicht', workspaces: 'Arbeitsbereiche', subscriptions: 'Abonnements', invoices: 'Rechnungen', support: 'Support', plans: 'Tarife', users: 'Benutzer', audit: 'Audit-Protokoll', system: 'Systemzustand' },
+    twoFactorRequired: 'Für die Super-Admin-Konsole ist die Zwei-Faktor-Authentifizierung Pflicht.', enable2fa: '2FA aktivieren',
+    signups: 'Registrierungen', active: 'Aktive Benutzer', dau: 'Täglich aktiv', wau: 'Wöchentlich aktiv', mau: 'Monatlich aktiv', mrr: 'Monatlich wiederkehrender Umsatz (MRR)', arr: 'Jährlich (ARR)',
+    conversion: 'Test → bezahlt', churn: 'Kündigungen (30 Tage)', paidByPlan: 'Bezahlte Tarife', unverified: 'Unbestätigt', with2fa: 'Nutzt 2FA', openTickets: 'Offene Tickets', days: '{days} Tage',
+    filters: { all: 'Alle', trial: 'Im Test', expiring: 'Endet in 3 Tagen', paid: 'Bezahlt', free: 'Free', suspended: 'Gesperrt' },
+    source: 'Quelle', manual: 'Manuell', stripe: 'Stripe', retry: 'Erneut versuchen', attempts: 'Versuche', revenue30: 'Umsatz (30 Tage)', error: 'Fehler',
+    assign: 'Zuständig', setStatus: 'Status', setPriority: 'Priorität', replyAndClose: 'Antworten und schließen', customer: 'Kunde', plan: 'Tarif',
+    planEditor: 'Tarif bearbeiten', defaults: 'Standard', overridden: 'Geändert', resetPlan: 'Auf Standard zurücksetzen', priceWarning: 'Legen Sie bei Preisänderungen auch in Stripe einen neuen Preis an und tragen Sie dessen ID ein (price_…), sonst wird der alte Preis berechnet.', saved: 'Tarif gespeichert.',
+    stripePriceMonthly: 'Stripe-Preis (monatlich)', stripePriceYearly: 'Stripe-Preis (jährlich)', monthly: 'Monatspreis', yearly: 'Jahrespreis', limits: 'Limits', features: 'Funktionen', unlimitedHint: 'Leer lassen: unbegrenzt',
+    checks: 'Dienste', failedJobs: 'Fehlgeschlagene Hintergrundjobs', recentErrors: 'Letzte Fehler', noErrors: 'Keine Fehler. 🎉', forget: 'Löschen', versions: 'Versionen', lastSeen: 'Zuletzt aktiv', verified: 'Bestätigt',
   },
   errors: { server: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.', forbidden: 'Dazu sind Sie nicht berechtigt.', notFound: 'Seite nicht gefunden.' },
 };

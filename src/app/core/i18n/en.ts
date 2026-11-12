@@ -18,7 +18,7 @@ export const en: typeof hu = {
   nav: {
     dashboard: 'Dashboard', clients: 'Clients', leads: 'Leads', pipeline: 'Pipeline', tasks: 'Tasks', calendar: 'Calendar',
     forms: 'Forms', imports: 'Import', reports: 'Reports', team: 'Team', settings: 'Settings', admin: 'Super Admin',
-    workspace: 'Workspace', newWorkspace: 'New workspace', notifications: 'Notifications', noNotifications: 'No new notifications.',
+    support: 'Support', workspace: 'Workspace', newWorkspace: 'New workspace', notifications: 'Notifications', noNotifications: 'No new notifications.',
     menu: 'Menu', markRead: 'Mark all read',
   },
   auth: {
@@ -228,6 +228,26 @@ export const en: typeof hu = {
     deleteTitle: 'Delete account', deleteText: 'Your account and all data of the workspaces you own are permanently deleted and your subscription ends immediately. Issued invoices are kept as required by accounting law. This cannot be undone.', deleteTeamHint: 'If your workspace has other members, transfer ownership on the Team page first.',
     deleteConfirm: 'Type {word} to confirm', deleteWord: 'DELETE', deleteButton: 'Delete account permanently', deleted: 'Your account has been deleted.',
     transferTitle: 'Transfer ownership', transferText: 'Another member becomes the owner of the workspace; you stay an admin.', transferButton: 'Transfer', transferConfirm: 'Transfer ownership to {name}?', transferred: 'Ownership transferred.',
+  },
+  support: {
+    title: 'Support', subtitle: 'Have a question or something is not working? Write to us and we will reply.', new: 'New request', subject: 'Subject', category: 'Category', message: 'Message',
+    send: 'Send', reply: 'Reply', replyPlaceholder: 'Write your reply…', close: 'Close', closed: 'Closed', staff: 'VállalkozóOS Support', you: 'You', sent: 'We got it and will reply soon.',
+    priorityNote: 'Based on your plan, your request has {priority} priority.', empty: 'No requests yet. If you get stuck, just write to us!', messages: 'messages',
+    categories: { question: 'Question', bug: 'Bug report', billing: 'Billing', feature: 'Feature request', account: 'Account' },
+    statuses: { open: 'Awaiting reply', answered: 'Answered', pending: 'In progress', closed: 'Closed' },
+    priorities: { low: 'Low', normal: 'Normal', high: 'High', urgent: 'Urgent' },
+  },
+  platform: {
+    tabs: { overview: 'Overview', workspaces: 'Workspaces', subscriptions: 'Subscriptions', invoices: 'Invoices', support: 'Support', plans: 'Plans', users: 'Users', audit: 'Audit log', system: 'System health' },
+    twoFactorRequired: 'Two-factor authentication is required for the Super Admin console.', enable2fa: 'Enable 2FA',
+    signups: 'Sign-ups', active: 'Active users', dau: 'Daily active', wau: 'Weekly active', mau: 'Monthly active', mrr: 'Monthly recurring revenue (MRR)', arr: 'Annual (ARR)',
+    conversion: 'Trial → paid', churn: 'Churn (30 days)', paidByPlan: 'Paid plans', unverified: 'Unverified', with2fa: 'Using 2FA', openTickets: 'Open tickets', days: '{days} days',
+    filters: { all: 'All', trial: 'On trial', expiring: 'Ends within 3 days', paid: 'Paid', free: 'Free', suspended: 'Suspended' },
+    source: 'Source', manual: 'Manual', stripe: 'Stripe', retry: 'Retry', attempts: 'Attempts', revenue30: 'Revenue (30 days)', error: 'Error',
+    assign: 'Assignee', setStatus: 'Status', setPriority: 'Priority', replyAndClose: 'Reply and close', customer: 'Customer', plan: 'Plan',
+    planEditor: 'Edit plan', defaults: 'Default', overridden: 'Overridden', resetPlan: 'Reset to defaults', priceWarning: 'When changing a price, create a new price in Stripe too and enter its ID (price_…), otherwise customers are charged the old price.', saved: 'Plan saved.',
+    stripePriceMonthly: 'Stripe price (monthly)', stripePriceYearly: 'Stripe price (yearly)', monthly: 'Monthly price', yearly: 'Yearly price', limits: 'Limits', features: 'Features', unlimitedHint: 'Leave empty: unlimited',
+    checks: 'Services', failedJobs: 'Failed background jobs', recentErrors: 'Recent errors', noErrors: 'No errors. 🎉', forget: 'Delete', versions: 'Versions', lastSeen: 'Last seen', verified: 'Verified',
   },
   errors: { server: 'Something went wrong. Please try again later.', forbidden: 'You are not allowed to do this.', notFound: 'Page not found.' },
 };

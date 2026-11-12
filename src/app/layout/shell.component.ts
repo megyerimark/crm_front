@@ -73,8 +73,10 @@ interface NavItem {
         <button class="ws-btn" type="button" (click)="toggle('ws')">
           <span class="avatar">{{ auth.workspace()?.name | initials }}</span>
           <span class="spacer truncate">
-            <span class="truncate" style="display:block">{{ auth.workspace()?.name }}</span>
-            <small>{{ 'roles.' + auth.role() | t }} · {{ planLabel() }}</small>
+            <span class="truncate" style="display:block">{{ auth.workspace()?.name ?? ('nav.workspace' | t) }}</span>
+            @if (auth.role()) {
+              <small>{{ 'roles.' + auth.role() | t }} · {{ planLabel() }}</small>
+            }
           </span>
           <app-icon name="chevronDown" [size]="16" />
         </button>
@@ -96,7 +98,7 @@ interface NavItem {
 
       <nav>
         @for (item of nav; track item.path) {
-          @if (!item.admin || auth.isAdmin()) {
+          @if (auth.workspace() && (!item.admin || auth.isAdmin())) {
             <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: !!item.exact }"><app-icon [name]="item.icon" /> {{ item.label | t }}</a>
           }
         }
@@ -135,7 +137,7 @@ interface NavItem {
             {{ trialDays() === 0 ? ('plan.trialEndsToday' | t) : ('plan.trialEnds' | t: { days: trialDays() }) }}
           </a>
         }
-        @if (!auth.canWrite()) {
+        @if (auth.workspace() && !auth.canWrite()) {
           <span class="badge"><app-icon name="eye" [size]="12" /> {{ 'common.readOnly' | t }}</span>
         }
         <div class="spacer"></div>
@@ -215,6 +217,7 @@ export class ShellComponent {
     { path: '/reports', icon: 'chart', label: 'nav.reports' },
     { path: '/team', icon: 'team', label: 'nav.team' },
     { path: '/settings', icon: 'settings', label: 'nav.settings' },
+    { path: '/support', icon: 'message', label: 'nav.support' },
   ];
 
   /** Bottom tab bar on phones: the four most used screens. */
@@ -289,6 +292,9 @@ export class ShellComponent {
   }
 
   private loadNotifications(): void {
+    if (!this.auth.workspaceId()) {
+      return;
+    }
     this.api.get<{ data: AppNotification[]; unread: number }>('notifications').subscribe({
       next: (res) => {
         this.notifications.set(res.data);

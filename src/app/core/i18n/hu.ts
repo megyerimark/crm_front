@@ -16,7 +16,7 @@ export const hu = {
   nav: {
     dashboard: 'Áttekintés', clients: 'Ügyfelek', leads: 'Érdeklődők', pipeline: 'Értékesítés', tasks: 'Teendők', calendar: 'Naptár',
     forms: 'Űrlapok', imports: 'Import', reports: 'Riportok', team: 'Csapat', settings: 'Beállítások', admin: 'Super Admin',
-    workspace: 'Munkaterület', newWorkspace: 'Új munkaterület', notifications: 'Értesítések', noNotifications: 'Nincs új értesítés.',
+    support: 'Ügyfélszolgálat', workspace: 'Munkaterület', newWorkspace: 'Új munkaterület', notifications: 'Értesítések', noNotifications: 'Nincs új értesítés.',
     menu: 'Menü', markRead: 'Mind olvasott',
   },
   auth: {
@@ -226,6 +226,26 @@ export const hu = {
     deleteTitle: 'Fiók törlése', deleteText: 'A fiókod és a saját munkaterületeid minden adata véglegesen törlődik, az előfizetésed azonnal megszűnik. A kiállított számlákat a számviteli törvény miatt megőrizzük. Ez a művelet nem vonható vissza.', deleteTeamHint: 'Ha a munkaterületednek más tagjai is vannak, előbb add át a tulajdonjogot a Csapat oldalon.',
     deleteConfirm: 'A megerősítéshez írd be: {word}', deleteWord: 'TÖRLÉS', deleteButton: 'Fiók végleges törlése', deleted: 'A fiókodat töröltük.',
     transferTitle: 'Tulajdonjog átadása', transferText: 'A munkaterület tulajdonosa egy másik tag lesz, te adminisztrátor maradsz.', transferButton: 'Átadás', transferConfirm: 'Biztosan átadod a tulajdonjogot neki: {name}?', transferred: 'A tulajdonjog átadva.',
+  },
+  support: {
+    title: 'Ügyfélszolgálat', subtitle: 'Kérdésed van, vagy valami nem működik? Írj nekünk, és válaszolunk.', new: 'Új kérdés', subject: 'Tárgy', category: 'Kategória', message: 'Üzenet',
+    send: 'Küldés', reply: 'Válasz', replyPlaceholder: 'Írd meg a válaszod…', close: 'Lezárás', closed: 'Lezárva', staff: 'VállalkozóOS Support', you: 'Te', sent: 'Megkaptuk, hamarosan válaszolunk.',
+    priorityNote: 'A csomagod alapján a kérdésed prioritása: {priority}.', empty: 'Még nincs kérdésed. Ha elakadsz, írj nekünk bátran!', messages: 'üzenet',
+    categories: { question: 'Kérdés', bug: 'Hibajelentés', billing: 'Számlázás', feature: 'Fejlesztési javaslat', account: 'Fiók' },
+    statuses: { open: 'Válaszra vár', answered: 'Megválaszolva', pending: 'Folyamatban', closed: 'Lezárva' },
+    priorities: { low: 'Alacsony', normal: 'Normál', high: 'Magas', urgent: 'Sürgős' },
+  },
+  platform: {
+    tabs: { overview: 'Áttekintés', workspaces: 'Munkaterületek', subscriptions: 'Előfizetések', invoices: 'Számlák', support: 'Support', plans: 'Csomagok', users: 'Felhasználók', audit: 'Auditnapló', system: 'Rendszerállapot' },
+    twoFactorRequired: 'A Super Admin felülethez kötelező a kétlépcsős azonosítás.', enable2fa: '2FA bekapcsolása',
+    signups: 'Regisztrációk', active: 'Aktív felhasználók', dau: 'Napi aktív', wau: 'Heti aktív', mau: 'Havi aktív', mrr: 'Havi ismétlődő bevétel (MRR)', arr: 'Éves (ARR)',
+    conversion: 'Próba → fizetős', churn: 'Lemondás (30 nap)', paidByPlan: 'Fizetős csomagok', unverified: 'Nem megerősített', with2fa: '2FA-t használ', openTickets: 'Nyitott jegy', days: '{days} nap',
+    filters: { all: 'Mind', trial: 'Próbán', expiring: '3 napon belül lejár', paid: 'Fizetős', free: 'Free', suspended: 'Felfüggesztett' },
+    source: 'Forrás', manual: 'Kézi', stripe: 'Stripe', retry: 'Újrapróbálás', attempts: 'Próbálkozás', revenue30: 'Bevétel (30 nap)', error: 'Hiba',
+    assign: 'Felelős', setStatus: 'Állapot', setPriority: 'Prioritás', replyAndClose: 'Válasz és lezárás', customer: 'Ügyfél', plan: 'Csomag',
+    planEditor: 'Csomag szerkesztése', defaults: 'Alapértelmezés', overridden: 'Módosítva', resetPlan: 'Visszaállítás alapra', priceWarning: 'Ár módosításakor a Stripe-ban is hozz létre új árat, és add meg az azonosítóját (price_…), különben a fizetés a régi áron történik.', saved: 'Csomag mentve.',
+    stripePriceMonthly: 'Stripe ár (havi)', stripePriceYearly: 'Stripe ár (éves)', monthly: 'Havi díj', yearly: 'Éves díj', limits: 'Limitek', features: 'Funkciók', unlimitedHint: 'Üresen hagyva: korlátlan',
+    checks: 'Szolgáltatások', failedJobs: 'Sikertelen háttérfeladatok', recentErrors: 'Legutóbbi hibák', noErrors: 'Nincs hiba. 🎉', forget: 'Törlés', versions: 'Verziók', lastSeen: 'Utoljára aktív', verified: 'Megerősítve',
   },
   errors: { server: 'Váratlan hiba történt. Próbáld újra később.', forbidden: 'Ehhez nincs jogosultságod.', notFound: 'Az oldal nem található.' },
 };
